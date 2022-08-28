@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .PButton-primary {
+        @apply bg-yellow-400 font-bold py-3 px-8 rounded-full
+    }
+
+    .PButton-primary:hover {
+        @apply bg-yellow-300
+    }
+
+    .PButton-red {
+        @apply bg-red-700 font-bold text-white py-3 px-8 rounded-full
+    }
+
+    .PButton-red:hover {
+        @apply bg-red-500
+    }
+
+    .PHeading3 {
+        @apply text-xl font-bold
+    }
+}
