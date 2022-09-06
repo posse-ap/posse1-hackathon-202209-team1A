@@ -5,7 +5,7 @@
             <form class="flex items-center shadow">
                 <div class="container flex mx-auto">
                     <div class="flex relative">
-                        <input type="text" class="px-8 py-2 w-80 border-slate-300 rounded" placeholder="キーワードで検索">
+                        <input type="text" class="px-8 py-2 border-slate-300 rounded search-box" placeholder="キーワードで検索">
                         <svg class="w-6 h-6 text-gray-600 absolute top-2 left-2" fill="#C6C9CC" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24">
                             <path
