@@ -1,4 +1,4 @@
-<footer class="flex flex-col items-center mt-20 bg-alice-blue bottom-0 sticky w-full">
+<footer class="flex flex-col items-center mt-20 bg-alice-blue bottom-0 absolute w-full">
     <div class="pt-8">
         <a href="/">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
