@@ -53,3 +53,4 @@ Route::prefix('items')->group(function () {
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
+
