@@ -1220,6 +1220,10 @@ select {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
 .py-12 {
   padding-top: 3rem;
   padding-bottom: 3rem;
@@ -1232,10 +1236,6 @@ select {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
 }
-.py-8 {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
 .pt-8 {
   padding-top: 2rem;
 }
@@ -1247,6 +1247,9 @@ select {
 }
 .pt-1 {
   padding-top: 0.25rem;
+}
+.pb-2 {
+  padding-bottom: 0.5rem;
 }
 .pl-3 {
   padding-left: 0.75rem;
@@ -1265,9 +1268,6 @@ select {
 }
 .pb-1 {
   padding-bottom: 0.25rem;
-}
-.pb-2 {
-  padding-bottom: 0.5rem;
 }
 .text-left {
   text-align: left;
