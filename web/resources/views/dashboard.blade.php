@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="bg-hero-pattern bg-cover w-full flex flex-col items-center">
-        <h1 class="text-white font-bold text-3xl pt-8 py-2git mt-4">コミュニティで作る、POSSEのライブラリ</h1>
+        <h1 class="text-white font-bold text-3xl pt-8 pb-2 mt-4">コミュニティで作る、POSSEのライブラリ</h1>
         <div class="grow py-4 mb-8">
             <form class="flex items-center shadow">
                 <div class="container flex mx-auto">
