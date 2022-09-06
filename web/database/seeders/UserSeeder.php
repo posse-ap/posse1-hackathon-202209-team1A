@@ -1,0 +1,29 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\User;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class UserSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $data = [
+            [
+                'name' => '小堺真季子',
+                'email' => 'test@com',
+                'password' => bcrypt('password'),
+                'is_admin' => true,
+            ],
+        ];
+
+        User::insert($data);
+    }
+}

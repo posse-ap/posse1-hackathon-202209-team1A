@@ -23,3 +23,7 @@
         @apply text-xl font-bold
     }
 }
+
+.search-box {
+    width: 590px;
+}
