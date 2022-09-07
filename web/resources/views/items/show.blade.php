@@ -34,7 +34,7 @@
                         </div>
                         <div class="py-4">
                             <button type="submit"
-                                @if ($item->is_rented()) class="PButton-disabled w-full"
+                                @if ($item->is_borrowed()) class="PButton-disabled w-full"
                                     disabled
                                 @else
                                     class="PButton-primary w-full" @endif>利用申請を行う</button>
