@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminItemController;
+use App\Http\Controllers\Admin\AdminUsageHistoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MypageController;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('users', [AdminUserController::class, 'index'])->name('admin.users.index');
+    Route::get('userHistory', [AdminUsageHistoryController::class, 'index'])->name('admin.userHistory.index');
 
     Route::prefix('categories')->group(function () {
         Route::get('/', [AdminCategoryController::class, 'index'])->name('admin.categories.index');
