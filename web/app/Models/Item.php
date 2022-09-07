@@ -39,6 +39,11 @@ class Item extends Model
         return UsageHistory::where('item_id', $this->id)->where('is_returned', false)->exists();
     }
 
+    public function is_available()
+    {
+        return UsageHistory::where('item_id', $this->id)->where('is_returned', true)->exists();
+    }
+
     public function am_borrowing()
     {
         return UsageHistory::where('item_id', $this->id)->where('is_returned', false)->where('user_id', Auth::id())->exists();
