@@ -39,12 +39,15 @@
                                 </div>
                                 <div class="py-4">
                                     <button type="submit"
-                                        class="PButton-primary w-full">利用申請を行う</button>
+                                        @if ($item->is_borrowed()) class="PButton-disabled w-full" disabled @else 
+                                    class="PButton-primary w-full" @endif>
+                                        利用申請を行う</button>
                                 </div>
                             </div>
                         </form>
                     @else
-                        <form action="{{ route('application.edit', ['id' => $item->am_borrowing_history()->id]) }}" method="POST">
+                        <form action="{{ route('application.edit', ['id' => $item->am_borrowing_history()->id]) }}"
+                            method="POST">
                             @csrf
                             <div class="w-80 mx-auto">
                                 <div class="py-4">
@@ -54,17 +57,17 @@
                                         <input type="hidden" name="item_id" value="{{ intval($item->id) }}">
                                         <input
                                             class="inlin-block text-sm rounded-lg border border-gray-300 cursor-pointer focus:outline-none"
-                                            name="start_date" type="date" value="{{ $item->am_borrowing_history()->start_at }}"
-                                            readonly="readonly">
+                                            name="start_date" type="date"
+                                            value="{{ $item->am_borrowing_history()->start_at }}" readonly="readonly">
                                         <span class="px-2">〜</span>
                                         <input
                                             class="inlin-block text-sm rounded-lg border border-gray-300 cursor-pointer focus:outline-none"
-                                            name="end_date" type="date" value="{{ $item->am_borrowing_history()->return_at }}">
+                                            name="end_date" type="date"
+                                            value="{{ $item->am_borrowing_history()->return_at }}">
                                     </div>
                                 </div>
                                 <div class="py-4">
-                                    <button type="submit"
-                                        class="PButton-primary w-full">利用期間を変更する</button>
+                                    <button type="submit" class="PButton-primary w-full">利用期間を変更する</button>
                                 </div>
                             </div>
                         </form>
