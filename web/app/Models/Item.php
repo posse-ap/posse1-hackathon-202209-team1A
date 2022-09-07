@@ -32,4 +32,9 @@ class Item extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function is_rented()
+    {
+        return UsageHistory::where('item_id', $this->id)->where('is_returned', false)->exists();
+    }
 }

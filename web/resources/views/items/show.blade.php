@@ -17,19 +17,19 @@
                             <div class="flex items-center">
                                 <input
                                     class="inlin-block text-sm rounded-lg border border-gray-300 cursor-pointer focus:outline-none"
-                                    name="start_date"
-                                    type="date"
-                                >
+                                    name="start_date" type="date">
                                 <span class="px-2">〜</span>
                                 <input
                                     class="inlin-block text-sm rounded-lg border border-gray-300 cursor-pointer focus:outline-none"
-                                    name="end_date"
-                                    type="date"
-                                >
+                                    name="end_date" type="date">
                             </div>
                         </div>
                         <div class="py-4">
-                            <button type="submit" class="PButton-primary w-full">利用申請を行う</button>
+                            <button type="submit"
+                                @if ($item->is_rented()) class="PButton-disabled w-full"
+                                    disabled
+                                @else
+                                    class="PButton-primary w-full" @endif>利用申請を行う</button>
                         </div>
                     </div>
                 </form>
