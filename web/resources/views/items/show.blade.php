@@ -70,10 +70,6 @@
                                 </div>
                             </div>
                         </form>
-                    @endif
-
-
-                    @if ($item->am_borrowing_history())
                         <form class="py-4" action="{{ route('application.returnItem', ['id' => $item->id]) }}"
                             method="POST">
                             <div class="w-80 mx-auto">
