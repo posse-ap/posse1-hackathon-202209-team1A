@@ -43,9 +43,7 @@
                                 </div>
                             </div>
                         </form>
-                    @endif
-
-                    @if ($item->am_borrowing_history())
+                    @else
                         <form action="{{ route('application.edit', ['id' => $item->am_borrowing_history()->id]) }}" method="POST">
                             @csrf
                             <div class="w-80 mx-auto">
