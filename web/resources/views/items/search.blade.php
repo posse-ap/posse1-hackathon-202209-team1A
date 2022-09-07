@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout :keyword="$keyword">
 
     <div class="grid grid-cols-1 gap-8 mt-8 px-0 md:px-32">
         <div>
