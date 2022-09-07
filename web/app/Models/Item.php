@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Item extends Model
 {
@@ -33,8 +34,23 @@ class Item extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function is_rented()
+    public function is_borrowed()
     {
         return UsageHistory::where('item_id', $this->id)->where('is_returned', false)->exists();
+    }
+
+    public function am_borrowing()
+    {
+        return UsageHistory::where('item_id', $this->id)->where('is_returned', false)->where('user_id', Auth::id())->exists();
+    }
+
+    public function usageHistories()
+    {
+        return $this->hasMany(UsageHistory::class);
+    }
+
+    public function latestUsageHistory()
+    {
+        return UsageHistory::where('item_id', $this->id)->where('is_returned', false)->first();
     }
 }

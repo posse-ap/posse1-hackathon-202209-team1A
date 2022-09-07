@@ -13,8 +13,6 @@ class ItemController extends Controller
         $item = Item::where('id', $id)->with('category')->first();
         $histories = UsageHistory::where('item_id', $id)->latest()->take(5)->get();
         return view('items.show', compact('item', 'histories'));
-        $keyword = null;
-        return view('items.show', compact('item', 'keyword'));
     }
 
     public function search(Request $request)
