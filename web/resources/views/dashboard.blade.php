@@ -30,7 +30,7 @@
     <div class="h-full px-8 sm:px-12 lg:px-24">
         <div class="py-12 text-center">
             <h2 class="text-2xl font-bold py-6">新着</h2>
-            <div class="flex justify-center py-4">
+            <div class="flex py-4">
                 @foreach ($latestItems as $key => $item)
                     @if ($key < $displayLimit)
                         <x-item-card :item="$item"></x-item-card>
@@ -51,7 +51,7 @@
         @foreach ($categoryItems as $category)
             <div class="py-12 text-center">
                 <h2 class="text-2xl font-bold py-6">{{ $category->name }}</h2>
-                <div class="flex justify-center py-4">
+                <div class="flex py-4">
                     @foreach ($category->items as $key => $item)
                         @if ($key < $displayLimit)
                             <x-item-card :item="$item"></x-item-card>
