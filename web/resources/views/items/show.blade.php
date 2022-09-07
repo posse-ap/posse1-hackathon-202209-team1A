@@ -36,13 +36,15 @@
                                         name="end_date" type="date">
                                 </div>
                             </div>
-                            <div class="py-4">
-                                <button type="submit"
-                                    @if ($item->is_borrowed()) class="PButton-disabled w-full"
-                                        disabled
-                                    @else
+                            @if (!$item->am_borrowing_history())
+                                <div class="py-4">
+                                    <button type="submit"
+                                        @if ($item->is_borrowed()) class="PButton-disabled w-full"
+                                            disabled
+                                        @else
                                         class="PButton-primary w-full" @endif>利用申請を行う</button>
-                            </div>
+                                </div>
+                            @endif
                         </div>
                     </form>
                     @if ($item->am_borrowing_history())
