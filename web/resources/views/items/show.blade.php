@@ -17,15 +17,11 @@
                             <div class="flex items-center">
                                 <input
                                     class="inlin-block text-sm rounded-lg border border-gray-300 cursor-pointer focus:outline-none"
-                                    name="start_date"
-                                    type="date"
-                                >
+                                    name="start_date" type="date">
                                 <span class="px-2">〜</span>
                                 <input
                                     class="inlin-block text-sm rounded-lg border border-gray-300 cursor-pointer focus:outline-none"
-                                    name="end_date"
-                                    type="date"
-                                >
+                                    name="end_date" type="date">
                             </div>
                         </div>
                         <div class="py-4">
@@ -37,6 +33,8 @@
         </div>
         <div>
             <h3 class="PHeading3 border-l-4 p-2 border-blue-500">履歴</h3>
+            @foreach ($logs as $log)
+            @endforeach
         </div>
         <div>
             <h3 class="PHeading3 border-l-4 p-2 border-blue-500">情報</h3>
