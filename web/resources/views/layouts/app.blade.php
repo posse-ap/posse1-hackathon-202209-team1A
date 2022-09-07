@@ -18,7 +18,7 @@
         <div class="text-sm relative">
 
             <!-- Page Heading -->
-            @include('components.header')
+            @include('components.header', ['keyword'=>$keyword])
 
             <!-- Page Content -->
             <main class="h-full">
