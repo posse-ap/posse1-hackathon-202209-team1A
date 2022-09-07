@@ -12,7 +12,8 @@ class DashboardController extends Controller
         $displayLimit = 4;
         $latestItems = Item::latestItems();
         $categoryItems = Category::findCategoriesWithItem();
+        $keyword = null;
 
-        return view('dashboard', compact('displayLimit', 'latestItems', 'categoryItems'));
+        return view('dashboard', compact('displayLimit', 'latestItems', 'categoryItems', 'keyword'));
     }
 }
