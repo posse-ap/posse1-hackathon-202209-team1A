@@ -47,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('items/{id}', [UserController::class, 'store'])->name('application.create');
     Route::post('items/returnItem/{id}', [UserController::class, 'returnItem'])->name('application.returnItem');
     Route::get('mypage', [MypageController::class, 'index'])->name('mypage');
+    Route::post('mypage', [MypageController::class, 'edit'])->name('mypage.edit');
 });
 
 Route::prefix('items')->group(function () {
