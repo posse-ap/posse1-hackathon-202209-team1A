@@ -11,6 +11,10 @@
         @apply bg-yellow-300
     }
 
+    .PButton-disabled {
+        @apply bg-gray-200 font-bold py-3 px-8 rounded-full text-white
+    }
+
     .PButton-red {
         @apply bg-red-700 font-bold text-white py-3 px-8 rounded-full
     }
