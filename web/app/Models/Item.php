@@ -24,7 +24,7 @@ class Item extends Model
      */
     public static function latestItems(): Collection
     {
-        return self::whereDate('created_at', '>=', Carbon::now()->subDays(self::LATEST_ITEMS_DAYS))
+        return self::where('is_public', true)->whereDate('created_at', '>=', Carbon::now()->subDays(self::LATEST_ITEMS_DAYS))
             ->with('category')
             ->get();
     }
