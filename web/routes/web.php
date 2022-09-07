@@ -46,6 +46,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('items/{id}', [ItemController::class, 'show'])->name('items.show');
     Route::post('items/{id}', [UserController::class, 'store'])->name('application.create');
     Route::get('mypage', [MypageController::class, 'index'])->name('mypage');
+    Route::post('mypage', [MypageController::class, 'edit'])->name('mypage.edit');
 });
 
 Route::prefix('items')->group(function () {
