@@ -7,7 +7,7 @@
                     @csrf
                     <div class="relative">
                         <input type="text" class="px-8 py-2 border-slate-300 rounded search-box" placeholder="キーワードで検索"
-                            name="keyword" value={{ $keyword }}>
+                            name="keyword" @if(isset($keyword)) value="{{ $keyword  }}"@endif>
                         <button type="submit" class="w-6 h-6 text-gray-600 absolute top-2 left-2">
                             <svg class="w-full" fill="#C6C9CC" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <path

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class UsageHistory extends Model
 {
     use HasFactory;
+
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
 }

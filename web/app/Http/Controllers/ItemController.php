@@ -10,8 +10,7 @@ class ItemController extends Controller
     public function show(int $id)
     {
         $item = Item::where('id', $id)->with('category')->first();
-        $keyword = null;
-        return view('items.show', compact('item', 'keyword'));
+        return view('items.show', compact('item'));
     }
 
     public function search(Request $request)
