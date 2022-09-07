@@ -1047,6 +1047,9 @@ select {
 .flex-col {
   flex-direction: column;
 }
+.flex-wrap {
+  flex-wrap: wrap;
+}
 .items-end {
   align-items: flex-end;
 }
