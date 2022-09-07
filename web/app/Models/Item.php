@@ -24,7 +24,7 @@ class Item extends Model
      */
     public static function latestItems(): Collection
     {
-        return self::whereDate('created_at', '>=', Carbon::now()->subDays(self::LATEST_ITEMS_DAYS))
+        return self::where('is_public', 1)->whereDate('created_at', '>=', Carbon::now()->subDays(self::LATEST_ITEMS_DAYS))
             ->with('category')
             ->get();
     }
@@ -58,4 +58,14 @@ class Item extends Model
     {
         return UsageHistory::where('item_id', $this->id)->where('is_returned', false)->first();
     }
+
+    // public function is_public()
+    // {
+    //     return 1;
+    // }
+
+    // public function is_hidden()
+    // {
+    //     return 0;
+    // }
 }
