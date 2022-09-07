@@ -1,5 +1,13 @@
 <x-app-layout>
-
+    @auth
+        @if ($item->am_borrowing())
+            <div class="bg-applied-use text-center py-3">
+                <p class="text-lime-800 font-bold text-lg">
+                    利用申請済みです
+                </p>
+            </div>
+        @endif
+    @endauth
     <div class="grid grid-cols-2 gap-8 mt-8 px-0 md:px-32">
         <div>
             <div class="bg-slate-100 text-center">
@@ -29,7 +37,7 @@
                         </div>
                         <div class="py-4">
                             <button type="submit"
-                                @if ($item->is_rented()) class="PButton-disabled w-full"
+                                @if ($item->is_borrowed()) class="PButton-disabled w-full"
                                     disabled
                                 @else
                                     class="PButton-primary w-full" @endif>利用申請を行う</button>
