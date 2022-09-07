@@ -31,6 +31,11 @@
                                 @else
                                     class="PButton-primary w-full" @endif>利用申請を行う</button>
                         </div>
+                        <div class="py-4">
+                            @if ($item->is_borrowing())
+                                <button type="submit" class="PButton-red w-full">返却する</button>
+                            @endif
+                        </div>
                     </div>
                 </form>
             </div>
