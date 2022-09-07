@@ -49,10 +49,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('items/returnItem/{id}', [UserController::class, 'returnItem'])->name('application.returnItem');
     Route::get('mypage', [MypageController::class, 'index'])->name('mypage');
     Route::post('mypage', [MypageController::class, 'edit'])->name('mypage.edit');
+    Route::post('mypage/password', [MypageController::class, 'update'])->name('mypage.passwordUpdate');
 });
 
 Route::prefix('items')->group(function () {
     Route::get('search/{keyword?}', [ItemController::class, 'result'])->name('items.result');
+    Route::get('category/{categoryId?}', [ItemController::class, 'categoryList'])->name('items.categoryList');
+    Route::get('latest/list', [ItemController::class, 'latestList'])->name('items.latestList');
 });
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
