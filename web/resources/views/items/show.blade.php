@@ -37,8 +37,22 @@
         </div>
         <div>
             <h3 class="PHeading3 border-l-4 p-2 border-blue-500">履歴</h3>
-            @foreach ($logs as $log)
-            @endforeach
+            <table class="w-full">
+                <tbody>
+                    @foreach ($histories as $history)
+                        <tr class="border-y-2">
+                            <td class="px-4 py-6 font-bold w-max whitespace-nowrap">
+                                @if ($history->is_returned)
+                                    返却済み
+                                @endif
+                            </td>
+                            <td class="px-4 py-6 whitespace-nowrap">{{ $history->start_at }}~{{ $history->return_at }}
+                            </td>
+                            <td class="px-4 py-6">{{ $history->user->name }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
         <div>
             <h3 class="PHeading3 border-l-4 p-2 border-blue-500">情報</h3>
