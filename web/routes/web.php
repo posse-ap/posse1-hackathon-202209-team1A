@@ -45,6 +45,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('items/{id}', [ItemController::class, 'show'])->name('items.show');
     Route::post('items/{id}', [UserController::class, 'store'])->name('application.create');
+    Route::post('items/returnItem/{id}', [UserController::class, 'returnItem'])->name('application.returnItem');
     Route::get('mypage', [MypageController::class, 'index'])->name('mypage');
 });
 
@@ -56,4 +57,3 @@ Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::post('/', [ItemController::class, 'search'])->name('items.search');
 
 require __DIR__ . '/auth.php';
-
