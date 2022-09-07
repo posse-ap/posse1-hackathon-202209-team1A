@@ -25,7 +25,11 @@
                             </div>
                         </div>
                         <div class="py-4">
-                            <button type="submit" class="PButton-primary w-full">利用申請を行う</button>
+                            <button type="submit"
+                                @if ($item->is_rented()) class="PButton-disabled w-full"
+                                    disabled
+                                @else
+                                    class="PButton-primary w-full" @endif>利用申請を行う</button>
                         </div>
                     </div>
                 </form>

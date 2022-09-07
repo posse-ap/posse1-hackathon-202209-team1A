@@ -47,10 +47,11 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::prefix('items')->group(function () {
-    Route::get('/search', [ItemController::class, 'search'])->name('items.search');
+    Route::get('search/{keyword?}', [ItemController::class, 'result'])->name('items.result');
 });
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+Route::post('/', [ItemController::class, 'search'])->name('items.search');
 
 require __DIR__ . '/auth.php';
 

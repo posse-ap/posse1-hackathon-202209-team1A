@@ -1,3 +1,7 @@
+@props([
+    'keyword',
+])
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -18,7 +22,11 @@
         <div class="text-sm relative">
 
             <!-- Page Heading -->
-            @include('components.header')
+            @if(isset($keyword))
+                @include('components.header', ["keyword", $keyword])
+            @else
+                @include('components.header')
+            @endif
 
             <!-- Page Content -->
             <main class="h-full">

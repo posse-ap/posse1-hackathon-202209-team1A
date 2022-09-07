@@ -22,6 +22,12 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('password'),
                 'is_admin' => true,
             ],
+            [
+                'name' => 'みきはる',
+                'email' => 'test1@com',
+                'password' => bcrypt('password'),
+                'is_admin' => true,
+            ],
         ];
 
         User::insert($data);
