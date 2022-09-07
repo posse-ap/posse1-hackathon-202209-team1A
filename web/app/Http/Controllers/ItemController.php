@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Item;
 use App\Models\UsageHistory;
 use Illuminate\Http\Request;
@@ -29,7 +30,6 @@ class ItemController extends Controller
     {
         $items = Item::paginate(20);
         $query = Item::query();
-        $displayLimit = 4;
 
         if ($keyword) {
 
@@ -41,11 +41,29 @@ class ItemController extends Controller
 
             // 単語をループで回し、ユーザーネームと部分一致するものがあれば、$queryとして保持される
             foreach ($wordArraySearched as $value) {
-                $query->where('name', 'like', '%' . $value . '%');
+                $query->where('is_public', true)->where('name', 'like', '%' . $value . '%');
             }
 
             $items = $query->paginate(20);
         }
-        return view('items.search', compact('displayLimit', 'items', 'keyword'));
+        return view('items.search', compact('items', 'keyword'));
+    }
+
+    public function categoryList($categoryId)
+    {
+        $items = Item::where('category_id', $categoryId)->where('is_public', true)->paginate(20);
+        $categoryName = Category::find($categoryId)->name;
+        $keyword = null;
+
+        return view('items.search', compact('items', 'categoryName', 'keyword'));
+    }
+
+    public function latestList()
+    {
+        $items = Item::where('is_public', true)->orderBy('created_at', 'desc')->paginate(20);
+        $categoryName = "新着";
+        $keyword = null;
+
+        return view('items.search', compact('items', 'categoryName', 'keyword'));
     }
 }
