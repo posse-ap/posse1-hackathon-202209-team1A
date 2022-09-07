@@ -18,35 +18,61 @@
             <h3 class="PHeading3 border-b-2 py-6">{{ $item->name }}</h3>
             <div>
                 <div class="border-b-2 py-4">
-                    <form action="{{ route('application.create', ['id' => $item->id]) }}" method="POST">
-                        @csrf
-                        <div class="w-80 mx-auto">
-                            <div class="py-4">
-                                <label class="text-gray-700 text-xs">利用期間</label>
-                                <div class="flex items-center">
-                                    <input type="hidden" name="user_id" value="{{ Auth::id() }}">
-                                    <input type="hidden" name="item_id" value="{{ intval($item->id) }}">
-                                    <input
-                                        class="inlin-block text-sm rounded-lg border border-gray-300 cursor-pointer focus:outline-none"
-                                        name="start_date" type="date" value="{{ date('Y-m-d') }}"
-                                        readonly="readonly">
-                                    <span class="px-2">〜</span>
-                                    <input
-                                        class="inlin-block text-sm rounded-lg border border-gray-300 cursor-pointer focus:outline-none"
-                                        name="end_date" type="date">
+                    @if (!$item->am_borrowing_history())
+                        <form action="{{ route('application.create', ['id' => $item->id]) }}" method="POST">
+                            @csrf
+                            <div class="w-80 mx-auto">
+                                <div class="py-4">
+                                    <label class="text-gray-700 text-xs">利用期間</label>
+                                    <div class="flex items-center">
+                                        <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                                        <input type="hidden" name="item_id" value="{{ intval($item->id) }}">
+                                        <input
+                                            class="inlin-block text-sm rounded-lg border border-gray-300 cursor-pointer focus:outline-none"
+                                            name="start_date" type="date" value="{{ date('Y-m-d') }}"
+                                            readonly="readonly">
+                                        <span class="px-2">〜</span>
+                                        <input
+                                            class="inlin-block text-sm rounded-lg border border-gray-300 cursor-pointer focus:outline-none"
+                                            name="end_date" type="date">
+                                    </div>
                                 </div>
-                            </div>
-                            @if (!$item->am_borrowing_history())
                                 <div class="py-4">
                                     <button type="submit"
-                                        @if ($item->is_borrowed()) class="PButton-disabled w-full"
-                                            disabled
-                                        @else
-                                        class="PButton-primary w-full" @endif>利用申請を行う</button>
+                                        class="PButton-primary w-full">利用申請を行う</button>
                                 </div>
-                            @endif
-                        </div>
-                    </form>
+                            </div>
+                        </form>
+                    @endif
+
+                    @if ($item->am_borrowing_history())
+                        <form action="{{ route('application.edit', ['id' => $item->am_borrowing_history()->id]) }}" method="POST">
+                            @csrf
+                            <div class="w-80 mx-auto">
+                                <div class="py-4">
+                                    <label class="text-gray-700 text-xs">利用期間</label>
+                                    <div class="flex items-center">
+                                        <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                                        <input type="hidden" name="item_id" value="{{ intval($item->id) }}">
+                                        <input
+                                            class="inlin-block text-sm rounded-lg border border-gray-300 cursor-pointer focus:outline-none"
+                                            name="start_date" type="date" value="{{ $item->am_borrowing_history()->start_at }}"
+                                            readonly="readonly">
+                                        <span class="px-2">〜</span>
+                                        <input
+                                            class="inlin-block text-sm rounded-lg border border-gray-300 cursor-pointer focus:outline-none"
+                                            name="end_date" type="date" value="{{ $item->am_borrowing_history()->return_at }}">
+                                    </div>
+                                </div>
+                                <div class="py-4">
+                                    <button type="submit"
+                                        class="PButton-primary w-full">利用期間を変更する</button>
+                                </div>
+                            </div>
+                        </form>
+                    @endif
+
+
                     @if ($item->am_borrowing_history())
                         <form class="py-4" action="{{ route('application.returnItem', ['id' => $item->id]) }}"
                             method="POST">

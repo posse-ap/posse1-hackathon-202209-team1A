@@ -72,9 +72,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        UsageHistory::find($request->id)->update([
+            'return_at' => $request->end_date,
+        ]);
+        return to_route('items.show', ['id' => $request->item_id]);
     }
 
     /**
