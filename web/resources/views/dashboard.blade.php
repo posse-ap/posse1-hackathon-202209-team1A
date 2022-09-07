@@ -18,6 +18,13 @@
                     </div>
                 </div>
             </form>
+            <div class="flex text-white whitespace-nowrap mt-4">
+                <p>キーワード：</p>
+                <a href="{{ route('items.result', ['keyword' => "Go言語"]) }}" class="block mr-3">Go言語</a>
+                <a href="{{ route('items.result', ['keyword' => "Rust"]) }}" class="block mr-3">Rust</a>
+                <a href="{{ route('items.result', ['keyword' => "スクラム"]) }}" class="block mr-3">スクラム</a>
+                <a href="{{ route('items.result', ['keyword' => "Laravel"]) }}" class="block mr-3">Laravel</a>
+            </div>
         </div>
     </div>
     <div class="h-full px-8 sm:px-12 lg:px-24">
