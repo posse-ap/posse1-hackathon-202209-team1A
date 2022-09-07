@@ -9,23 +9,22 @@
         <div>
             <h3 class="PHeading3 border-b-2 py-6">{{ $item->name }}</h3>
             <div>
-                <form action="", method="POST" class="border-b-2 py-4">
+                <form action="{{ route('application.create', ['id' => $item->id]) }}" method="POST"
+                    class="border-b-2 py-4">
                     @csrf
                     <div class="w-80 mx-auto">
                         <div class="py-4">
                             <label class="text-gray-700 text-xs">利用期間</label>
                             <div class="flex items-center">
+                                <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                                <input type="hidden" name="item_id" value="{{ intval($item->id) }}">
                                 <input
                                     class="inlin-block text-sm rounded-lg border border-gray-300 cursor-pointer focus:outline-none"
-                                    name="start_date"
-                                    type="date"
-                                >
+                                    name="start_date" type="date" value="{{ date('Y-m-d') }}" readonly="readonly">
                                 <span class="px-2">〜</span>
                                 <input
                                     class="inlin-block text-sm rounded-lg border border-gray-300 cursor-pointer focus:outline-none"
-                                    name="end_date"
-                                    type="date"
-                                >
+                                    name="end_date" type="date">
                             </div>
                         </div>
                         <div class="py-4">
@@ -33,6 +32,12 @@
                         </div>
                     </div>
                 </form>
+                <!-- フラッシュメッセージ -->
+                @if (session('flash_message'))
+                    <div class="flash_message">
+                        {{ session('flash_message') }}
+                    </div>
+                @endif
             </div>
         </div>
         <div>

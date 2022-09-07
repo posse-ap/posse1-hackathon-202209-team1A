@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminItemController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MypageController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +44,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('items/{id}', [ItemController::class, 'show'])->name('items.show');
+    Route::post('items/{id}', [UserController::class, 'store'])->name('application.create');
     Route::get('mypage', [MypageController::class, 'index'])->name('mypage');
 });
 
