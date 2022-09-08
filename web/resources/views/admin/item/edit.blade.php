@@ -16,7 +16,7 @@
                         <label for="public" class="ml-2 text-sm font-medium">はい</label>
                     </div>
                     <div class="flex items-center">
-                        <input id="private" type="radio" name="is_public" value="{{ false }}"
+                        <input id="private" type="radio" name="is_public" value="{{ 0 }}"
                             class="w-4 h-4" {{ $item->is_public ? '' : 'checked' }}>
                         <label for="private" class="ml-2 text-sm font-medium">いいえ</label>
                     </div>
