@@ -32,7 +32,7 @@
                                 <img src="{{ \Storage::url($item->image_path) }}">
                             </div>
                             @endif
-                            <span class="w-full">{{ $item->name }}</span>
+                            <span class="w-full">{{ Str::limit($item->name, 40, $end='...') }}</span>
                         </div>
                     </td>
                     <td class="px-4 py-6">{{ $item->available_days }}日</td>
