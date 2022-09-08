@@ -30,7 +30,8 @@
     <div class="h-full px-8 sm:px-12 lg:px-24">
         <div class="py-12 text-center">
             <h2 class="text-2xl font-bold py-6">新着</h2>
-            <div class="flex py-4">
+            <div class="flex py-4"
+            @if(!Auth::check()) id="modal-open" @endif>
                 @foreach ($latestItems as $key => $item)
                     @if ($key < $displayLimit)
                         <x-item-card :item="$item"></x-item-card>
@@ -70,4 +71,13 @@
             </div>
         @endforeach
     </div>
+    {{-- @if (Auth::check()) --}}
+    <div id="modal-load" class="md:w-2/4 w-11/12 rounded-2xl block modal-load">
+        {{-- <div class="modal-inner" id="buy-ticket-modal"> --}}
+            @include('modals.please_login')
+        {{-- </div> --}}
+    </div>
+    <div class="overlay">
+    </div>
+{{-- @endif --}}
 </x-guest-layout>
