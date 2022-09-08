@@ -23,7 +23,7 @@ class Category extends Model
      */
     public static function findCategoriesWithItem(): Collection
     {
-        $categories = self::latest()->with('items')->get();
+        $categories = self::with('items')->get();
 
         return $categories->filter(function ($value, $key) {
             return count($value->items->where('is_public', true)) > 0;
