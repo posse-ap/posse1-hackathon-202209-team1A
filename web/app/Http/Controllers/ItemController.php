@@ -58,7 +58,7 @@ class ItemController extends Controller
         return view('items.search', compact('items', 'categoryName', 'keyword'));
     }
 
-    public function latestList($categoryId, $availableId)
+    public function latestList($categoryId, $availableId, $sortId)
     {
         $items = Item::where('is_public', true)->orderBy('created_at', 'desc')->paginate(10);
         $categoryName = "新着";
@@ -67,34 +67,66 @@ class ItemController extends Controller
 
         if ($categoryId != 0) {
             if ($availableId == 0) {
-                $items = Item::where('is_public', true)->where('category_id', $categoryId)->orderBy('created_at', 'desc')->paginate(10);
+                if ($sortId == 0) {
+                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->orderBy('created_at', 'desc')->paginate(10);
+                } else {
+                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
+                }
             } elseif ($availableId == 1) {
-                $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereDoesntHave('usageHistories', function ($query) {
-                    $query->where('is_returned', false);
-                })
-                    ->orderBy('created_at', 'desc')->paginate(10);
+                if ($sortId == 0) {
+                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereDoesntHave('usageHistories', function ($query) {
+                        $query->where('is_returned', false);
+                    })
+                        ->orderBy('created_at', 'desc')->paginate(10);
+                } else {
+                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereDoesntHave('usageHistories', function ($query) {
+                        $query->where('is_returned', false);
+                    })->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
+                }
             } else {
-                $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereHas('usageHistories', function ($query) {
-                    $query->where('is_returned', false);
-                })
-                    ->orderBy('created_at', 'desc')->paginate(10);
+                if ($sortId == 0) {
+                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereHas('usageHistories', function ($query) {
+                        $query->where('is_returned', false);
+                    })
+                        ->orderBy('created_at', 'desc')->paginate(10);
+                } else {
+                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereHas('usageHistories', function ($query) {
+                        $query->where('is_returned', false);
+                    })->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
+                }
             }
         } else {
             if ($availableId == 0) {
-                $items = Item::where('is_public', true)->paginate(10);
+                if ($sortId == 0) {
+                    $items = Item::where('is_public', true)->orderBy('created_at', 'desc')->paginate(10);
+                } else {
+                    $items = Item::where('is_public', true)->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
+                }
             } elseif ($availableId == 1) {
-                $items = Item::where('is_public', true)->whereDoesntHave('usageHistories', function ($query) {
-                    $query->where('is_returned', false);
-                })
-                    ->orderBy('created_at', 'desc')->paginate(10);
+                if ($sortId == 0) {
+                    $items = Item::where('is_public', true)->whereDoesntHave('usageHistories', function ($query) {
+                        $query->where('is_returned', false);
+                    })
+                        ->orderBy('created_at', 'desc')->paginate(10);
+                } else {
+                    $items = Item::where('is_public', true)->whereDoesntHave('usageHistories', function ($query) {
+                        $query->where('is_returned', false);
+                    })->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
+                }
             } else {
-                $items = Item::where('is_public', true)->whereHas('usageHistories', function ($query) {
-                    $query->where('is_returned', false);
-                })
-                    ->orderBy('created_at', 'desc')->paginate(10);
+                if ($sortId == 0) {
+                    $items = Item::where('is_public', true)->whereHas('usageHistories', function ($query) {
+                        $query->where('is_returned', false);
+                    })
+                        ->orderBy('created_at', 'desc')->paginate(10);
+                } else {
+                    $items = Item::where('is_public', true)->whereHas('usageHistories', function ($query) {
+                        $query->where('is_returned', false);
+                    })->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
+                }
             }
         }
 
-        return view('items.search', compact('items', 'categoryName', 'keyword', 'categories', 'categoryId', 'availableId'));
+        return view('items.search', compact('items', 'categoryName', 'keyword', 'categories', 'categoryId', 'availableId', 'sortId'));
     }
 }
