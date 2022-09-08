@@ -74,7 +74,7 @@ class UsageHistorySeeder extends Seeder
             ],
             [
                 'user_id' => 2,
-                'item_id' => 1,
+                'item_id' => 3,
                 'is_returned' => true,
                 'start_at' => "2022-05-15",
                 'return_at' => "2022-05-22",
@@ -82,7 +82,7 @@ class UsageHistorySeeder extends Seeder
             ],
             [
                 'user_id' => 3,
-                'item_id' => 6,
+                'item_id' => 5,
                 'is_returned' => false,
                 'start_at' => "2022-09-01",
                 'return_at' => "2022-09-22",

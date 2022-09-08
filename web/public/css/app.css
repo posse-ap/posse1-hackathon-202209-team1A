@@ -757,6 +757,9 @@ select {
   line-height: 1.75rem;
   font-weight: 700;
 }
+.fixed {
+  position: fixed;
+}
 .absolute {
   position: absolute;
 }
@@ -774,9 +777,6 @@ select {
 }
 .left-0 {
   left: 0px;
-}
-.right-0 {
-  right: 0px;
 }
 .z-0 {
   z-index: 0;
@@ -829,6 +829,9 @@ select {
 .mr-8 {
   margin-right: 2rem;
 }
+.mb-4 {
+  margin-bottom: 1rem;
+}
 .ml-2 {
   margin-left: 0.5rem;
 }
@@ -852,6 +855,27 @@ select {
 }
 .ml-12 {
   margin-left: 3rem;
+}
+.ml-1 {
+  margin-left: 0.25rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.mr-2 {
+  margin-right: 0.5rem;
+}
+.ml-4 {
+  margin-left: 1rem;
+}
+.-mt-px {
+  margin-top: -1px;
+}
+.mt-1 {
+  margin-top: 0.25rem;
+}
+.-mr-2 {
+  margin-right: -0.5rem;
 }
 .mr-5 {
   margin-right: 1.25rem;
@@ -916,6 +940,12 @@ select {
 .h-10 {
   height: 2.5rem;
 }
+.min-h-screen {
+  min-height: 100vh;
+}
+.h-4 {
+  height: 1rem;
+}
 .w-5 {
   width: 1.25rem;
 }
@@ -954,6 +984,18 @@ select {
 .w-6 {
   width: 1.5rem;
 }
+.w-8 {
+  width: 2rem;
+}
+.w-auto {
+  width: auto;
+}
+.w-auto {
+  width: auto;
+}
+.w-4 {
+  width: 1rem;
+}
 .w-1\/12 {
   width: 8.333333%;
 }
@@ -962,6 +1004,12 @@ select {
 }
 .w-1\/3 {
   width: 33.333333%;
+}
+.max-w-xl {
+  max-width: 36rem;
+}
+.max-w-6xl {
+  max-width: 72rem;
 }
 .w-auto {
   width: auto;
@@ -1105,6 +1153,15 @@ select {
 .border-l-4 {
   border-left-width: 4px;
 }
+.border-t {
+  border-top-width: 1px;
+}
+.border-r {
+  border-right-width: 1px;
+}
+.border-b {
+  border-bottom-width: 1px;
+}
 .border-b-4 {
   border-bottom-width: 4px;
 }
@@ -1137,13 +1194,17 @@ select {
 .border-transparent {
   border-color: transparent;
 }
-.border-gray-100 {
-  --tw-border-opacity: 1;
-  border-color: rgb(243 244 246 / var(--tw-border-opacity));
-}
 .border-gray-200 {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
+}
+.border-gray-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(156 163 175 / var(--tw-border-opacity));
+}
+.border-gray-100 {
+  --tw-border-opacity: 1;
+  border-color: rgb(243 244 246 / var(--tw-border-opacity));
 }
 .bg-white {
   --tw-bg-opacity: 1;
@@ -1236,6 +1297,10 @@ select {
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -1243,6 +1308,10 @@ select {
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
+}
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
 }
 .py-8 {
   padding-top: 2rem;
@@ -1341,6 +1410,12 @@ select {
 .leading-tight {
   line-height: 1.25;
 }
+.tracking-widest {
+  letter-spacing: 0.1em;
+}
+.tracking-wider {
+  letter-spacing: 0.05em;
+}
 .tracking-wide {
   letter-spacing: 0.025em;
 }
@@ -1371,6 +1446,10 @@ select {
   --tw-text-opacity: 1;
   color: rgb(63 98 18 / var(--tw-text-opacity));
 }
+.text-red-600 {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
+}
 .text-blue-800 {
   --tw-text-opacity: 1;
   color: rgb(30 64 175 / var(--tw-text-opacity));
@@ -1387,6 +1466,18 @@ select {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
+.text-gray-900 {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+.text-gray-200 {
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity));
+}
+.text-gray-300 {
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity));
+}
 .text-red-600 {
   --tw-text-opacity: 1;
   color: rgb(220 38 38 / var(--tw-text-opacity));
@@ -1402,6 +1493,10 @@ select {
 .text-gray-400 {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+.text-indigo-700 {
+  --tw-text-opacity: 1;
+  color: rgb(67 56 202 / var(--tw-text-opacity));
 }
 .text-gray-800 {
   --tw-text-opacity: 1;
@@ -1661,6 +1756,14 @@ select {
   opacity: 0.25;
 }
 
+@media (prefers-color-scheme: dark) {
+
+  .dark\:bg-gray-900 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+  }
+}
+
 @media (min-width: 640px) {
 
   .sm\:-my-px {
@@ -1698,6 +1801,10 @@ select {
 
   .sm\:items-center {
     align-items: center;
+  }
+
+  .sm\:justify-start {
+    justify-content: flex-start;
   }
 
   .sm\:justify-center {
@@ -1741,6 +1848,11 @@ select {
   .lg\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+
+  .lg\:px-32 {
+    padding-left: 8rem;
+    padding-right: 8rem;
   }
 }
 
