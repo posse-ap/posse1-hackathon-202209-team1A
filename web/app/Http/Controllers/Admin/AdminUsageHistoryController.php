@@ -9,7 +9,7 @@ class AdminUsageHistoryController extends Controller
 {
     public function index()
     {
-        $usage_histories = UsageHistory::simplePaginate(10);
+        $usage_histories = UsageHistory::paginate(10);
         return view('admin.user_history.index', compact('usage_histories'));
     }
 }
