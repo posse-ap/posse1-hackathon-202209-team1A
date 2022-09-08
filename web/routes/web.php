@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminItemController;
+use App\Http\Controllers\Admin\AdminUsageHistoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MypageController;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('users', [AdminUserController::class, 'index'])->name('admin.users.index');
+    Route::get('userHistory', [AdminUsageHistoryController::class, 'index'])->name('admin.userHistory.index');
 
     Route::prefix('categories')->group(function () {
         Route::get('/', [AdminCategoryController::class, 'index'])->name('admin.categories.index');
@@ -45,6 +47,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('items/{id}', [ItemController::class, 'show'])->name('items.show');
     Route::post('items/{id}', [UserController::class, 'store'])->name('application.create');
+    Route::post('items/edit/{id}', [UserController::class, 'edit'])->name('application.edit');
     Route::post('items/returnItem/{id}', [UserController::class, 'returnItem'])->name('application.returnItem');
     Route::get('mypage', [MypageController::class, 'index'])->name('mypage');
     Route::post('mypage', [MypageController::class, 'edit'])->name('mypage.edit');
