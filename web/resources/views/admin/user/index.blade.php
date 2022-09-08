@@ -21,4 +21,5 @@
             @endforeach
         </tbody>
     </table>
+    {{ $users->links('vendor.pagination.tailwind2') }}
 </x-admin-layout>
