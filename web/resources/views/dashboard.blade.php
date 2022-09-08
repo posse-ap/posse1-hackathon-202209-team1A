@@ -56,32 +56,33 @@
         @if ($loop->index < $displayLimit)
             <div class="py-12 text-center">
                 <h2 class="text-2xl font-bold py-6">{{ $category->name }}</h2>
-                <div class="flex py-4">
-                    @foreach ($category->items as $key => $item)
-                        @if ($key < $displayLimit)
-                            <x-item-card :item="$item"></x-item-card>
-                        @endif
-                    @endforeach
-                </div>
-                <div>
-                    <a href="{{ route('items.categoryList', ['categoryId' => $category->id]) }}"
-                        class="inline-block bg-transparent hover:bg-gray-100 text-gray-500 font-semibold py-2 px-6 border border-gray-500 rounded">
-                        <div class="flex items-center">
-                            <span class="px-2">すべて見る</span>
-                            <x-codicon-triangle-down class="inline-block w-5 h-5" />
-                        </div>
-                    </a>
-                </div>
+                @if (!Auth::check())
+                    <div class="flex py-4 modal-open">
+                    @else
+                        <div class="flex py-4">
+                @endif
+                @foreach ($category->items as $key => $item)
+                    @if ($key < $displayLimit)
+                        <x-item-card :item="$item"></x-item-card>
+                    @endif
+                @endforeach
+            </div>
+            <div>
+                <a href="{{ route('items.categoryList', ['categoryId' => $category->id]) }}"
+                    class="inline-block bg-transparent hover:bg-gray-100 text-gray-500 font-semibold py-2 px-6 border border-gray-500 rounded">
+                    <div class="flex items-center">
+                        <span class="px-2">すべて見る</span>
+                        <x-codicon-triangle-down class="inline-block w-5 h-5" />
+                    </div>
+                </a>
+            </div>
         @endif
     @endforeach
     </div>
-    {{-- @if (Auth::check()) --}}
     <div id="modal-load" class="md:w-2/4 w-11/12 rounded-2xl block modal-load">
-        {{-- <div class="modal-inner" id="buy-ticket-modal"> --}}
         @include('modals.please_login')
-        {{-- </div> --}}
     </div>
     <div class="overlay">
     </div>
-    {{-- @endif --}}
+
 </x-guest-layout>

@@ -2,7 +2,9 @@
 
     <div class="grid grid-cols-1 gap-8 mt-8 px-0 md:px-32">
         <div>
-            <h1 class="PHeading3 border-l-4 p-2 border-blue-500">「@if (isset($keyword)){{ $keyword }}@else{{ $categoryName }}@endif」の備品一覧</h1>
+            <h1 class="PHeading3 border-l-4 p-2 border-blue-500">「@if (isset($keyword))
+                    {{ $keyword }}@else{{ $categoryName }}
+                @endif」の備品一覧</h1>
         </div>
         @if (isset($categoryName) && $categoryName == '新着')
             <div>
@@ -11,7 +13,8 @@
                     <ul class="flex items-center">
                         <li
                             class="@if ($categoryId == 0) PButton-primary-mini @else PButton-gray-mini @endif mr-3">
-                            <a href="{{ route('items.latestList', ['categoryId' => 0, 'availableId' => 0, 'sortId' => 0]) }}">全て</a>
+                            <a
+                                href="{{ route('items.latestList', ['categoryId' => 0, 'availableId' => 0, 'sortId' => 0]) }}">全て</a>
                         </li>
                         @foreach ($categories as $category)
                             <li
@@ -62,11 +65,20 @@
         <h2><span class="font-bold">{{ $items->total() }}</span>件見つかりました</h2>
     </div>
     <div class="h-full px-8 sm:px-12 lg:px-24">
-        <div class="flex py-4 flex-wrap">
-            @foreach ($items as $key => $item)
-                <x-item-card :item="$item"></x-item-card>
-            @endforeach
-        </div>
+        @if (!Auth::check())
+            <div class="flex py-4 flex-wrap modal-open">
+            @else
+                <div class="flex py-4 flex-wrap">
+        @endif
+        @foreach ($items as $key => $item)
+            <x-item-card :item="$item"></x-item-card>
+        @endforeach
+    </div>
     </div>
     {{ $items->links('vendor.pagination.tailwind2') }}
+    <div id="modal-load" class="md:w-2/4 w-11/12 rounded-2xl block modal-load">
+        @include('modals.please_login')
+    </div>
+    <div class="overlay">
+    </div>
 </x-app-layout>

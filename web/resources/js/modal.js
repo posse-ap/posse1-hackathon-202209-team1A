@@ -1,10 +1,6 @@
 $(function() {
   //モーダルウィンドウを出現させるクリックイベント
-$(".modal-open").click(function() {
-      //キーボード操作などにより、オーバーレイが多重起動するのを防止する
-      $(this).blur(); //ボタンからフォーカスを外す
-      if ($("#modal-overlay")[0]) return false; //新しくモーダルウィンドウを起動しない (防止策1)
-
+    $(".modal-open").click(function() {
       //オーバーレイを出現させる
     $("body").append('<div id="modal-overlay"></div>');
     $("#modal-overlay").fadeIn("slow");
