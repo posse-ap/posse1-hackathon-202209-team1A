@@ -98,7 +98,7 @@
                 @endforeach
             </div>
             <div>
-                <a href="{{ route('items.categoryList', ['categoryId' => $category->id]) }}"
+                <a href="{{ route('items.categoryList', ['categoryId' => $category->id, 'availableId' => 0, 'sortId' => 0]) }}"
                     class="inline-block bg-transparent hover:bg-gray-100 text-gray-500 font-semibold py-2 px-6 border border-gray-500 rounded">
                     <div class="flex items-center">
                         <span class="px-2">すべて見る</span>

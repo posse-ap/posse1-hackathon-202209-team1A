@@ -117,13 +117,78 @@ class ItemController extends Controller
         return view('items.search', compact('items', 'keyword', 'categoryId', 'availableId', 'sortId', 'categories'));
     }
 
-    public function categoryList($categoryId)
+    public function categoryList($categoryId, $availableId, $sortId)
     {
-        $items = Item::where('category_id', $categoryId)->where('is_public', true)->paginate(10);
-        $categoryName = Category::find($categoryId)->name;
+        $categories = Category::all();
         $keyword = null;
 
-        return view('items.search', compact('items', 'categoryName', 'keyword'));
+        if ($categoryId != 0) {
+            $categoryName = Category::find($categoryId)->name;
+
+            if ($availableId == 0) {
+                if ($sortId == 0) {
+                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->orderBy('created_at', 'desc')->paginate(10);
+                } else {
+                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
+                }
+            } elseif ($availableId == 1) {
+                if ($sortId == 0) {
+                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereDoesntHave('usageHistories', function ($query) {
+                        $query->where('is_returned', false);
+                    })
+                        ->orderBy('created_at', 'desc')->paginate(10);
+                } else {
+                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereDoesntHave('usageHistories', function ($query) {
+                        $query->where('is_returned', false);
+                    })->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
+                }
+            } else {
+                if ($sortId == 0) {
+                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereHas('usageHistories', function ($query) {
+                        $query->where('is_returned', false);
+                    })
+                        ->orderBy('created_at', 'desc')->paginate(10);
+                } else {
+                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereHas('usageHistories', function ($query) {
+                        $query->where('is_returned', false);
+                    })->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
+                }
+            }
+        } else {
+            $categoryName = "全て";
+
+            if ($availableId == 0) {
+                if ($sortId == 0) {
+                    $items = Item::where('is_public', true)->orderBy('created_at', 'desc')->paginate(10);
+                } else {
+                    $items = Item::where('is_public', true)->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
+                }
+            } elseif ($availableId == 1) {
+                if ($sortId == 0) {
+                    $items = Item::where('is_public', true)->whereDoesntHave('usageHistories', function ($query) {
+                        $query->where('is_returned', false);
+                    })
+                        ->orderBy('created_at', 'desc')->paginate(10);
+                } else {
+                    $items = Item::where('is_public', true)->whereDoesntHave('usageHistories', function ($query) {
+                        $query->where('is_returned', false);
+                    })->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
+                }
+            } else {
+                if ($sortId == 0) {
+                    $items = Item::where('is_public', true)->whereHas('usageHistories', function ($query) {
+                        $query->where('is_returned', false);
+                    })
+                        ->orderBy('created_at', 'desc')->paginate(10);
+                } else {
+                    $items = Item::where('is_public', true)->whereHas('usageHistories', function ($query) {
+                        $query->where('is_returned', false);
+                    })->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
+                }
+            }
+        }
+
+        return view('items.search', compact('items', 'categoryName', 'keyword', 'categoryId', 'availableId', 'sortId', 'categories'));
     }
 
     public function latestList($categoryId, $availableId, $sortId)
