@@ -123,6 +123,10 @@
                             <td class="px-4 py-2">{{ $item->category->name ?? '' }}</td>
                         </tr>
                         <tr>
+                            <td class="px-4 py-2 font-bold">状態</td>
+                            <td class="px-4 py-2">@if($item->is_borrowed())利用中 @else 利用可能 @endif</td>
+                        </tr>
+                        <tr>
                             <td class="px-4 py-2 font-bold">登録日時</td>
                             <td class="px-4 py-2">{{ $item->created_at }}</td>
                         </tr>
