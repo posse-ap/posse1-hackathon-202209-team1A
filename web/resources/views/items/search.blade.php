@@ -13,4 +13,5 @@
             @endforeach
         </div>
     </div>
+    {{ $items->links('vendor.pagination.tailwind2') }}
 </x-app-layout>
