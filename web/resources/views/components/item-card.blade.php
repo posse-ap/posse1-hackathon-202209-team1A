@@ -1,4 +1,4 @@
-<div class="text-left mx-4 modal-open" style="width: 300px;">
+<div class="text-left mx-4" style="width: 300px;">
     <p class="h-6 font-bold w-full">
         @if ($item->is_borrowed())
             {{ $item->latestUsageHistory()->user->name }}さんが利用中（〜{{ $item->latestUsageHistory()->return_at }}）
