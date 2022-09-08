@@ -775,6 +775,12 @@ select {
 .left-2 {
   left: 0.5rem;
 }
+.top-0 {
+  top: 0px;
+}
+.right-0 {
+  right: 0px;
+}
 .left-0 {
   left: 0px;
 }
@@ -784,13 +790,13 @@ select {
 .z-50 {
   z-index: 50;
 }
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
 .mx-4 {
   margin-left: 1rem;
   margin-right: 1rem;
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 .my-10 {
   margin-top: 2.5rem;
@@ -817,6 +823,9 @@ select {
 .mt-20 {
   margin-top: 5rem;
 }
+.mt-5 {
+  margin-top: 1.25rem;
+}
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -829,17 +838,8 @@ select {
 .mr-8 {
   margin-right: 2rem;
 }
-.mb-4 {
-  margin-bottom: 1rem;
-}
 .ml-2 {
   margin-left: 0.5rem;
-}
-.mt-3 {
-  margin-top: 0.75rem;
-}
-.mt-5 {
-  margin-top: 1.25rem;
 }
 .mt-4 {
   margin-top: 1rem;
@@ -852,6 +852,9 @@ select {
 }
 .mr-3 {
   margin-right: 0.75rem;
+}
+.mt-3 {
+  margin-top: 0.75rem;
 }
 .ml-12 {
   margin-left: 3rem;
@@ -879,18 +882,6 @@ select {
 }
 .mr-5 {
   margin-right: 1.25rem;
-}
-.mt-1 {
-  margin-top: 0.25rem;
-}
-.mt-2 {
-  margin-top: 0.5rem;
-}
-.ml-1 {
-  margin-left: 0.25rem;
-}
-.-mr-2 {
-  margin-right: -0.5rem;
 }
 .block {
   display: block;
@@ -934,6 +925,9 @@ select {
 .h-16 {
   height: 4rem;
 }
+.h-8 {
+  height: 2rem;
+}
 .h-20 {
   height: 5rem;
 }
@@ -942,9 +936,6 @@ select {
 }
 .min-h-screen {
   min-height: 100vh;
-}
-.h-4 {
-  height: 1rem;
 }
 .w-5 {
   width: 1.25rem;
@@ -990,12 +981,6 @@ select {
 .w-auto {
   width: auto;
 }
-.w-auto {
-  width: auto;
-}
-.w-4 {
-  width: 1rem;
-}
 .w-1\/12 {
   width: 8.333333%;
 }
@@ -1010,9 +995,6 @@ select {
 }
 .max-w-6xl {
   max-width: 72rem;
-}
-.w-auto {
-  width: auto;
 }
 .max-w-7xl {
   max-width: 80rem;
@@ -1165,12 +1147,6 @@ select {
 .border-b-4 {
   border-bottom-width: 4px;
 }
-.border-b {
-  border-bottom-width: 1px;
-}
-.border-t {
-  border-top-width: 1px;
-}
 .border-gray-300 {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
@@ -1249,6 +1225,9 @@ select {
 .p-2 {
   padding: 0.5rem;
 }
+.p-6 {
+  padding: 1.5rem;
+}
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -1309,25 +1288,17 @@ select {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
 }
-.px-10 {
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
-}
-.py-8 {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
 .pt-8 {
   padding-top: 2rem;
 }
 .pb-8 {
   padding-bottom: 2rem;
 }
-.pt-6 {
-  padding-top: 1.5rem;
-}
 .pt-5 {
   padding-top: 1.25rem;
+}
+.pt-6 {
+  padding-top: 1.5rem;
 }
 .pb-2 {
   padding-bottom: 0.5rem;
@@ -1410,14 +1381,14 @@ select {
 .leading-tight {
   line-height: 1.25;
 }
-.tracking-widest {
-  letter-spacing: 0.1em;
-}
-.tracking-wider {
-  letter-spacing: 0.05em;
+.leading-7 {
+  line-height: 1.75rem;
 }
 .tracking-wide {
   letter-spacing: 0.025em;
+}
+.tracking-wider {
+  letter-spacing: 0.05em;
 }
 .tracking-widest {
   letter-spacing: 0.1em;
@@ -1430,17 +1401,13 @@ select {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
 }
-.text-blue-600 {
+.text-green-600 {
   --tw-text-opacity: 1;
-  color: rgb(37 99 235 / var(--tw-text-opacity));
+  color: rgb(22 163 74 / var(--tw-text-opacity));
 }
 .text-red-500 {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
-}
-.text-green-600 {
-  --tw-text-opacity: 1;
-  color: rgb(22 163 74 / var(--tw-text-opacity));
 }
 .text-lime-800 {
   --tw-text-opacity: 1;
@@ -1478,18 +1445,6 @@ select {
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity));
 }
-.text-red-600 {
-  --tw-text-opacity: 1;
-  color: rgb(220 38 38 / var(--tw-text-opacity));
-}
-.text-gray-900 {
-  --tw-text-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-text-opacity));
-}
-.text-indigo-700 {
-  --tw-text-opacity: 1;
-  color: rgb(67 56 202 / var(--tw-text-opacity));
-}
 .text-gray-400 {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
@@ -1501,6 +1456,10 @@ select {
 .text-gray-800 {
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity));
+}
+.text-blue-600 {
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity));
 }
 .underline {
   -webkit-text-decoration-line: underline;
@@ -1848,11 +1807,6 @@ select {
   .lg\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;
-  }
-
-  .lg\:px-32 {
-    padding-left: 8rem;
-    padding-right: 8rem;
   }
 }
 
