@@ -91,6 +91,7 @@ class ItemSeeder extends Seeder
                 'available_days' => 14,
                 'is_public' => true,
                 'provider' => '株式会社アンチパターン',
+                'created_at' => "2022-02-15",
             ],
             [
                 'category_id' => 2,
@@ -99,6 +100,7 @@ class ItemSeeder extends Seeder
                 'available_days' => 14,
                 'is_public' => true,
                 'provider' => '株式会社アンチパターン',
+                'created_at' => "2022-02-15",
             ],
             [
                 'category_id' => 2,
@@ -107,6 +109,7 @@ class ItemSeeder extends Seeder
                 'available_days' => 14,
                 'is_public' => true,
                 'provider' => '株式会社アンチパターン',
+                'created_at' => "2022-02-15",
             ],
             [
                 'category_id' => 3,
@@ -124,6 +127,7 @@ class ItemSeeder extends Seeder
                 'available_days' => 14,
                 'is_public' => true,
                 'provider' => '株式会社アンチパターン',
+                'created_at' => "2022-02-15",
             ],
             [
                 'category_id' => 5,
@@ -132,6 +136,7 @@ class ItemSeeder extends Seeder
                 'available_days' => 14,
                 'is_public' => true,
                 'provider' => '株式会社アンチパターン',
+                'created_at' => "2022-02-15",
             ],
             [
                 'category_id' => 5,
@@ -140,6 +145,7 @@ class ItemSeeder extends Seeder
                 'available_days' => 14,
                 'is_public' => true,
                 'provider' => '株式会社アンチパターン',
+                'created_at' => "2022-02-15",
             ],
             [
                 'category_id' => 5,
@@ -166,6 +172,7 @@ class ItemSeeder extends Seeder
                 'available_days' => 14,
                 'is_public' => true,
                 'provider' => '株式会社アンチパターン',
+                'created_at' => "2022-02-15",
             ],
             [
                 'category_id' => 6,
@@ -174,6 +181,7 @@ class ItemSeeder extends Seeder
                 'available_days' => 14,
                 'is_public' => true,
                 'provider' => '株式会社アンチパターン',
+                'created_at' => "2022-02-15",
             ],
             [
                 'category_id' => 6,
@@ -191,6 +199,7 @@ class ItemSeeder extends Seeder
                 'available_days' => 14,
                 'is_public' => true,
                 'provider' => '株式会社アンチパターン',
+                'created_at' => "2022-02-15",
             ],
             [
                 'category_id' => 7,
@@ -199,6 +208,7 @@ class ItemSeeder extends Seeder
                 'available_days' => 14,
                 'is_public' => true,
                 'provider' => '株式会社アンチパターン',
+                'created_at' => "2022-02-15",
             ],
             [
                 'category_id' => 7,
