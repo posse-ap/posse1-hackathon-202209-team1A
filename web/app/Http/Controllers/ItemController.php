@@ -128,22 +128,6 @@ class ItemController extends Controller
                     })->whereHas('usageHistories', function ($query) {
                         $query->where('user_id', '<>', Auth::id())->whereDate('return_at', '>=', Carbon::now())->where('return_at', '<=', Carbon::now()->addDays(COMMING_SOON_ITEMS_DAYS));
                     })->latest()->paginate(10);
-                } else {
-                    $items = Item::where('is_public', true)->whereDoesntHave('usageHistories', function ($query) {
-                        $query->where('is_returned', false);
-                    })->whereHas('usageHistories', function ($query) {
-                        $query->where('user_id', '<>', Auth::id())->whereDate('return_at', '>=', Carbon::now())->where('return_at', '<=', Carbon::now()->addDays(COMMING_SOON_ITEMS_DAYS));
-                    })->latest()->paginate(10);
-                }
-            } else {
-                if ($sortId == 0) {
-                    $items = Item::where('is_public', true)->whereHas('usageHistories', function ($query) {
-                        $query->where('is_returned', false)->where('user_id', '<>', Auth::id())->whereDate('return_at', '>=', Carbon::now())->where('return_at', '<=', Carbon::now()->addDays(COMMING_SOON_ITEMS_DAYS));
-                    })->latest()->paginate(10);
-                } else {
-                    $items = Item::where('is_public', true)->whereHas('usageHistories', function ($query) {
-                        $query->where('is_returned', false)->where('user_id', '<>', Auth::id())->whereDate('return_at', '>=', Carbon::now())->where('return_at', '<=', Carbon::now()->addDays(COMMING_SOON_ITEMS_DAYS));
-                    })->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
                 }
             }
         }
