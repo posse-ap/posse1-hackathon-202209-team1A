@@ -152,7 +152,7 @@ class ItemSeeder extends Seeder
                 'name' => '何者',
                 'image_path' => Storage::putFile('public', new File('public/img/nani.jpeg')),
                 'available_days' => 14,
-                'is_public' => true,
+                'is_public' => false,
                 'provider' => '株式会社アンチパターン',
                 'created_at' => "2022-09-05",
             ],

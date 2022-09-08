@@ -144,6 +144,22 @@ class UsageHistorySeeder extends Seeder
                 'return_at' => "2020-09-10",
                 'created_at' => "2020-09-01",
             ],
+            [
+                'user_id' => 3,
+                'item_id' => 12,
+                'is_returned' => false,
+                'start_at' => "2022-09-08",
+                'return_at' => "2022-09-10",
+                'created_at' => "2022-09-01",
+            ],
+            [
+                'user_id' => 3,
+                'item_id' => 16,
+                'is_returned' => false,
+                'start_at' => "2022-09-08",
+                'return_at' => "2022-09-10",
+                'created_at' => "2022-09-01",
+            ],
         ];
 
         UsageHistory::insert($data);
