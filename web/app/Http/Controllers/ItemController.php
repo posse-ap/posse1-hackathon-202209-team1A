@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use App\Models\Category;
 use App\Models\Item;
 use App\Models\UsageHistory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+
+const COMMING_SOON_ITEMS_DAYS = 3;
 const LATEST_ITEMS_DAYS = 30;
 class ItemController extends Controller
 {
@@ -61,7 +64,6 @@ class ItemController extends Controller
 
     public function latestList($categoryId, $availableId, $sortId)
     {
-        $items = Item::where('is_public', true)->orderBy('created_at', 'desc')->paginate(10);
         $categoryName = "新着";
         $keyword = null;
         $categories = Category::all();
@@ -123,6 +125,107 @@ class ItemController extends Controller
                 } else {
                     $items = Item::where('is_public', true)->whereDate('created_at', '>=', Carbon::now()->subDays(LATEST_ITEMS_DAYS))->whereHas('usageHistories', function ($query) {
                         $query->where('is_returned', false);
+                    })->whereHas('usageHistories', function ($query) {
+                        $query->where('user_id', '<>', Auth::id())->whereDate('return_at', '>=', Carbon::now())->where('return_at', '<=', Carbon::now()->addDays(COMMING_SOON_ITEMS_DAYS));
+                    })->latest()->paginate(10);
+                } else {
+                    $items = Item::where('is_public', true)->whereDoesntHave('usageHistories', function ($query) {
+                        $query->where('is_returned', false);
+                    })->whereHas('usageHistories', function ($query) {
+                        $query->where('user_id', '<>', Auth::id())->whereDate('return_at', '>=', Carbon::now())->where('return_at', '<=', Carbon::now()->addDays(COMMING_SOON_ITEMS_DAYS));
+                    })->latest()->paginate(10);
+                }
+            } else {
+                if ($sortId == 0) {
+                    $items = Item::where('is_public', true)->whereHas('usageHistories', function ($query) {
+                        $query->where('is_returned', false)->where('user_id', '<>', Auth::id())->whereDate('return_at', '>=', Carbon::now())->where('return_at', '<=', Carbon::now()->addDays(COMMING_SOON_ITEMS_DAYS));
+                    })->latest()->paginate(10);
+                } else {
+                    $items = Item::where('is_public', true)->whereHas('usageHistories', function ($query) {
+                        $query->where('is_returned', false)->where('user_id', '<>', Auth::id())->whereDate('return_at', '>=', Carbon::now())->where('return_at', '<=', Carbon::now()->addDays(COMMING_SOON_ITEMS_DAYS));
+                    })->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
+                }
+            }
+        }
+
+        return view('items.search', compact('items', 'categoryName', 'keyword', 'categories', 'categoryId', 'availableId', 'sortId'));
+    }
+
+    public function commingSoonList($categoryId, $availableId, $sortId)
+    {
+        $categoryName = "もうすぐ利用できます";
+        $keyword = null;
+        $categories = Category::all();
+
+        if ($categoryId != 0) {
+            if ($availableId == 0) {
+                if ($sortId == 0) {
+                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereHas('usageHistories', function ($query) {
+                        $query->where('is_returned', false)->where('user_id', '<>', Auth::id())->whereDate('return_at', '>=', Carbon::now())->where('return_at', '<=', Carbon::now()->addDays(COMMING_SOON_ITEMS_DAYS));
+                    })->latest()->paginate(10);
+                } else {
+                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereHas('usageHistories', function ($query) {
+                        $query->where('is_returned', false)->where('user_id', '<>', Auth::id())->whereDate('return_at', '>=', Carbon::now())->where('return_at', '<=', Carbon::now()->addDays(COMMING_SOON_ITEMS_DAYS));
+                    })->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
+                }
+            } elseif ($availableId == 1) {
+                if ($sortId == 0) {
+                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereDoesntHave('usageHistories', function ($query) {
+                        $query->where('is_returned', false);
+                    })->whereHas('usageHistories', function ($query) {
+                        $query->where('user_id', '<>', Auth::id())->whereDate('return_at', '>=', Carbon::now())->where('return_at', '<=', Carbon::now()->addDays(COMMING_SOON_ITEMS_DAYS));
+                    })->latest()->paginate(10);
+                } else {
+                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereDoesntHave('usageHistories', function ($query) {
+                        $query->where('is_returned', false);
+                    })->whereHas('usageHistories', function ($query) {
+                        $query->where('user_id', '<>', Auth::id())->whereDate('return_at', '>=', Carbon::now())->where('return_at', '<=', Carbon::now()->addDays(COMMING_SOON_ITEMS_DAYS));
+                    })->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
+                }
+            } else {
+                if ($sortId == 0) {
+                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereHas('usageHistories', function ($query) {
+                        $query->where('is_returned', false)->where('user_id', '<>', Auth::id())->whereDate('return_at', '>=', Carbon::now())->where('return_at', '<=', Carbon::now()->addDays(COMMING_SOON_ITEMS_DAYS));
+                    })->latest()->paginate(10);
+                } else {
+                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereHas('usageHistories', function ($query) {
+                        $query->where('is_returned', false)->where('user_id', '<>', Auth::id())->whereDate('return_at', '>=', Carbon::now())->where('return_at', '<=', Carbon::now()->addDays(COMMING_SOON_ITEMS_DAYS));
+                    })->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
+                }
+            }
+        } else {
+            if ($availableId == 0) {
+                if ($sortId == 0) {
+                    $items = Item::where('is_public', true)->whereHas('usageHistories', function ($query) {
+                        $query->where('is_returned', false)->where('user_id', '<>', Auth::id())->whereDate('return_at', '>=', Carbon::now())->where('return_at', '<=', Carbon::now()->addDays(COMMING_SOON_ITEMS_DAYS));
+                    })->latest()->paginate(10);
+                } else {
+                    $items = Item::where('is_public', true)->whereHas('usageHistories', function ($query) {
+                        $query->where('is_returned', false)->where('user_id', '<>', Auth::id())->whereDate('return_at', '>=', Carbon::now())->where('return_at', '<=', Carbon::now()->addDays(COMMING_SOON_ITEMS_DAYS));
+                    })->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
+                }
+            } elseif ($availableId == 1) {
+                if ($sortId == 0) {
+                    $items = Item::where('is_public', true)->whereDoesntHave('usageHistories', function ($query) {
+                        $query->where('is_returned', false);
+                    })->whereHas('usageHistories', function ($query) {
+                        $query->where('user_id', '<>', Auth::id())->whereDate('return_at', '>=', Carbon::now())->where('return_at', '<=', Carbon::now()->addDays(COMMING_SOON_ITEMS_DAYS));
+                    })->latest()->paginate(10);
+                } else {
+                    $items = Item::where('is_public', true)->whereDoesntHave('usageHistories', function ($query) {
+                        $query->where('is_returned', false);
+                    })->whereHas('usageHistories', function ($query) {
+                        $query->where('user_id', '<>', Auth::id())->whereDate('return_at', '>=', Carbon::now())->where('return_at', '<=', Carbon::now()->addDays(COMMING_SOON_ITEMS_DAYS));
+                    })->latest()->paginate(10);
+                }
+            } else {
+                if ($sortId == 0) {
+                    $items = Item::where('is_public', true)->whereHas('usageHistories', function ($query) {
+                        $query->where('is_returned', false)->where('user_id', '<>', Auth::id())->whereDate('return_at', '>=', Carbon::now())->where('return_at', '<=', Carbon::now()->addDays(COMMING_SOON_ITEMS_DAYS));
+                    })->latest()->paginate(10);
+                } else {
+                    $items = Item::where('is_public', true)->whereHas('usageHistories', function ($query) {
+                        $query->where('is_returned', false)->where('user_id', '<>', Auth::id())->whereDate('return_at', '>=', Carbon::now())->where('return_at', '<=', Carbon::now()->addDays(COMMING_SOON_ITEMS_DAYS));
                     })->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
                 }
             }
