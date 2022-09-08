@@ -37,4 +37,5 @@
             @endforeach
         </tbody>
     </table>
+    {{ $categories->links('vendor.pagination.tailwind2') }}
 </x-admin-layout>

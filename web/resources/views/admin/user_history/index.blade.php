@@ -25,4 +25,5 @@
             @endforeach
         </tbody>
     </table>
+    {{ $usage_histories->links('vendor.pagination.tailwind2') }}
 </x-admin-layout>
