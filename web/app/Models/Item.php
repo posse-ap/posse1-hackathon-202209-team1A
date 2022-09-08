@@ -24,7 +24,7 @@ class Item extends Model
      */
     public static function latestItems(): Collection
     {
-        return self::whereDate('created_at', '>=', Carbon::now()->subDays(self::LATEST_ITEMS_DAYS))
+        return self::where('is_public', true)->whereDate('created_at', '>=', Carbon::now()->subDays(self::LATEST_ITEMS_DAYS))
             ->with('category')
             ->get();
     }
@@ -39,9 +39,9 @@ class Item extends Model
         return UsageHistory::where('item_id', $this->id)->where('is_returned', false)->exists();
     }
 
-    public function am_borrowing()
+    public function am_borrowing_history()
     {
-        return UsageHistory::where('item_id', $this->id)->where('is_returned', false)->where('user_id', Auth::id())->exists();
+        return UsageHistory::where('item_id', $this->id)->where('is_returned', false)->where('user_id', Auth::id())->first();
     }
 
     public function usageHistories()

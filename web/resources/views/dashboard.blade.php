@@ -30,7 +30,7 @@
     <div class="h-full px-8 sm:px-12 lg:px-24">
         <div class="py-12 text-center">
             <h2 class="text-2xl font-bold py-6">新着</h2>
-            <div class="flex justify-center py-4">
+            <div class="flex py-4">
                 @foreach ($latestItems as $key => $item)
                     @if ($key < $displayLimit)
                         <x-item-card :item="$item"></x-item-card>
@@ -38,7 +38,7 @@
                 @endforeach
             </div>
             <div>
-                <a href="/"
+                <a href="{{ route('items.latestList') }}"
                     class="inline-block bg-transparent hover:bg-gray-100 text-gray-500 font-semibold py-2 px-6 border border-gray-500 rounded">
                     <div class="flex items-center">
                         <span class="px-2">すべて見る</span>
@@ -52,7 +52,7 @@
             @if ($loop->index < $displayLimit)
                 <div class="py-12 text-center">
                     <h2 class="text-2xl font-bold py-6">{{ $category->name }}</h2>
-                    <div class="flex justify-center py-4">
+                    <div class="flex py-4">
                         @foreach ($category->items as $key => $item)
                             @if ($key < $displayLimit)
                                 <x-item-card :item="$item"></x-item-card>
@@ -60,7 +60,7 @@
                         @endforeach
                     </div>
                     <div>
-                        <a href="/"
+                        <a href="{{ route('items.categoryList', ['categoryId' => $category->id]) }}"
                             class="inline-block bg-transparent hover:bg-gray-100 text-gray-500 font-semibold py-2 px-6 border border-gray-500 rounded">
                             <div class="flex items-center">
                                 <span class="px-2">すべて見る</span>
@@ -68,7 +68,6 @@
                             </div>
                         </a>
                     </div>
-                </div>
             @endif
         @endforeach
     </div>

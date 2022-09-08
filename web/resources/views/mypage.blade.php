@@ -3,19 +3,20 @@
         <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white overflow-hidden">
             <div class="my-10">
                 <h2 class="text-2xl font-bold text-center mt-8 mb-12">ユーザー情報</h2>
-                <form method="POST" action="/">
+                <form method="POST" action="{{ route('mypage.edit') }}">
                     @csrf
-
                     <div>
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="email">メールアドレス</label>
                         <input
-                            class="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight">
+                            class="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight"
+                            name="email">
                     </div>
 
                     <div class="mt-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="password">お名前</label>
                         <input
-                            class="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight">
+                            class="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight"
+                            name="name">
                     </div>
 
                     <div class="flex items-center justify-end flex-col mt-8">
@@ -26,25 +27,38 @@
 
             <div class="my-10">
                 <h2 class="text-2xl font-bold text-center mt-8 mb-12">パスワード</h2>
-                <form method="POST" action="/">
+                @if (session('warning'))
+                    <p class="text-red-600 mb-4">
+                        {{ session('warning') }}
+                    </p>
+                @endif
+                <form method="POST" action="{{ route('mypage.passwordUpdate') }}">
                     @csrf
 
                     <div>
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">パスワード</label>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="new_password">パスワード</label>
                         <input
-                            class="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight">
+                            class="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight"
+                            name="new_password" type="password">
                     </div>
 
                     <div class="mt-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">パスワード（確認用）</label>
+                        <label class="block text-gray-700 text-sm font-bold mb-2"
+                            for="new_password_confirmation">パスワード（確認用）</label>
                         <input
-                            class="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight">
+                            class="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight"
+                            name="new_password_confirmation" type="password">
                     </div>
 
                     <div class="flex items-center justify-end flex-col mt-8">
                         <button type="submit" class="PButton-primary w-full">パスワードを変更</button>
                     </div>
                 </form>
+                @if (session('status'))
+                    <p class="mt-8 text-green-600">
+                        {{ session('status') }}
+                    </p>
+                @endif
             </div>
         </div>
         <div class="my-10 px-20">
@@ -58,7 +72,8 @@
                                     返却済み
                                 @endif
                             </td>
-                            <td class="px-4 py-6 whitespace-nowrap">{{ $history->start_at }}~{{ $history->return_at }}</td>
+                            <td class="px-4 py-6 whitespace-nowrap">{{ $history->start_at }}~{{ $history->return_at }}
+                            </td>
                             <td class="px-4 py-6">{{ $history->item->name }}</td>
                         </tr>
                     @endforeach

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Item;
 use App\Models\UsageHistory;
 use Illuminate\Http\Request;
@@ -10,7 +11,10 @@ class ItemController extends Controller
 {
     public function show(int $id)
     {
-        $item = Item::where('id', $id)->with('category')->first();
+        $item = Item::find($id);
+        if (!$item->is_public) { 
+            abort(404); 
+        }
         $histories = UsageHistory::where('item_id', $id)->latest()->take(5)->get();
         return view('items.show', compact('item', 'histories'));
     }
@@ -24,9 +28,8 @@ class ItemController extends Controller
 
     public function result($keyword)
     {
-        $items = Item::paginate(20);
+        $items = Item::paginate(10);
         $query = Item::query();
-        $displayLimit = 4;
 
         if ($keyword) {
 
@@ -38,11 +41,29 @@ class ItemController extends Controller
 
             // 単語をループで回し、ユーザーネームと部分一致するものがあれば、$queryとして保持される
             foreach ($wordArraySearched as $value) {
-                $query->where('name', 'like', '%' . $value . '%');
+                $query->where('is_public', true)->where('name', 'like', '%' . $value . '%');
             }
 
-            $items = $query->paginate(20);
+            $items = $query->paginate(10);
         }
-        return view('items.search', compact('displayLimit', 'items', 'keyword'));
+        return view('items.search', compact('items', 'keyword'));
+    }
+
+    public function categoryList($categoryId)
+    {
+        $items = Item::where('category_id', $categoryId)->where('is_public', true)->paginate(10);
+        $categoryName = Category::find($categoryId)->name;
+        $keyword = null;
+
+        return view('items.search', compact('items', 'categoryName', 'keyword'));
+    }
+
+    public function latestList()
+    {
+        $items = Item::where('is_public', true)->orderBy('created_at', 'desc')->paginate(10);
+        $categoryName = "新着";
+        $keyword = null;
+
+        return view('items.search', compact('items', 'categoryName', 'keyword'));
     }
 }

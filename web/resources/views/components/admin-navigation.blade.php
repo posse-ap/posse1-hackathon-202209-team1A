@@ -2,4 +2,5 @@
     <a href="{{ route('admin.items.index') }}" class="font-bold">備品</a>
     <a href="{{ route('admin.categories.index') }}" class="ml-12 font-bold">備品カテゴリ</a>
     <a href="{{ route('admin.users.index') }}" class="ml-12 font-bold">ユーザー</a>
+    <a href="{{ route('admin.userHistory.index') }}" class="ml-12 font-bold">利用履歴</a>
 </div>
