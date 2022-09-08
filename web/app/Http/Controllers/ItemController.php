@@ -28,7 +28,7 @@ class ItemController extends Controller
 
     public function result($keyword)
     {
-        $items = Item::paginate(20);
+        $items = Item::paginate(10);
         $query = Item::query();
 
         if ($keyword) {
