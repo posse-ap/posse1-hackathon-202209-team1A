@@ -11,7 +11,8 @@
                     <ul class="flex items-center">
                         <li
                             class="@if ($categoryId == 0) PButton-primary-mini @else PButton-gray-mini @endif mr-3">
-                            <a href="{{ route('items.latestList', ['categoryId' => 0, 'availableId' => 0, 'sortId' => 0]) }}">全て</a>
+                            <a
+                                href="{{ route('items.latestList', ['categoryId' => 0, 'availableId' => 0, 'sortId' => 0]) }}">全て</a>
                         </li>
                         @foreach ($categories as $category)
                             <li
@@ -54,6 +55,116 @@
                             class="@if ($sortId == 1) PButton-primary-mini @else PButton-gray-mini @endif mr-3">
                             <a
                                 href="{{ route('items.latestList', ['categoryId' => $categoryId, 'availableId' => $availableId, 'sortId' => 1]) }}">人気順</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        @elseif (isset($categoryName) && $categoryName == 'もうすぐ利用できます')
+            <div>
+                <div class="flex items-center pb-3">
+                    <p class="mr-3">カテゴリ：</p>
+                    <ul class="flex items-center">
+                        <li
+                            class="@if ($categoryId == 0) PButton-primary-mini @else PButton-gray-mini @endif mr-3">
+                            <a
+                                href="{{ route('items.commingSoonList', ['categoryId' => 0, 'availableId' => 0, 'sortId' => 0]) }}">全て</a>
+                        </li>
+                        @foreach ($categories as $category)
+                            <li
+                                class="@if ($categoryId == $category->id) PButton-primary-mini @else PButton-gray-mini @endif mr-3">
+                                <a
+                                    href="{{ route('items.commingSoonList', ['categoryId' => $category->id, 'availableId' => 0, 'sortId' => 0]) }}">{{ $category->name }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="flex items-center pb-3">
+                    <p class="mr-3">状態：</p>
+                    <ul class="flex items-center">
+                        <li
+                            class="@if ($availableId == 0) PButton-primary-mini @else PButton-gray-mini @endif mr-3">
+                            <a
+                                href="{{ route('items.commingSoonList', ['categoryId' => $categoryId, 'availableId' => 0, 'sortId' => 0]) }}">全て</a>
+                        </li>
+                        <li
+                            class="@if ($availableId == 1) PButton-primary-mini @else PButton-gray-mini @endif mr-3">
+                            <a
+                                href="{{ route('items.commingSoonList', ['categoryId' => $categoryId, 'availableId' => 1, 'sortId' => 0]) }}">利用可能</a>
+                        </li>
+                        <li
+                            class="@if ($availableId == 2) PButton-primary-mini @else PButton-gray-mini @endif mr-3">
+                            <a
+                                href="{{ route('items.commingSoonList', ['categoryId' => $categoryId, 'availableId' => 2, 'sortId' => 0]) }}">利用中</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex items-center pb-3">
+                    <p class="mr-3">並び順：</p>
+                    <ul class="flex items-center">
+                        <li
+                            class="@if ($sortId == 0) PButton-primary-mini @else PButton-gray-mini @endif mr-3">
+                            <a
+                                href="{{ route('items.commingSoonList', ['categoryId' => $categoryId, 'availableId' => $availableId, 'sortId' => 0]) }}">新着順</a>
+                        </li>
+                        <li
+                            class="@if ($sortId == 1) PButton-primary-mini @else PButton-gray-mini @endif mr-3">
+                            <a
+                                href="{{ route('items.commingSoonList', ['categoryId' => $categoryId, 'availableId' => $availableId, 'sortId' => 1]) }}">人気順</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        @elseif (isset($keyword))
+            <div>
+                <div class="flex items-center pb-3">
+                    <p class="mr-3">カテゴリ：</p>
+                    <ul class="flex items-center">
+                        <li
+                            class="@if ($categoryId == 0) PButton-primary-mini @else PButton-gray-mini @endif mr-3">
+                            <a
+                                href="{{ route('items.result', ['keyword' => $keyword, 'categoryId' => 0, 'availableId' => 0, 'sortId' => 0]) }}">全て</a>
+                        </li>
+                        @foreach ($categories as $category)
+                            <li
+                                class="@if ($categoryId == $category->id) PButton-primary-mini @else PButton-gray-mini @endif mr-3">
+                                <a
+                                    href="{{ route('items.result', ['keyword' => $keyword, 'categoryId' => $category->id, 'availableId' => 0, 'sortId' => 0]) }}">{{ $category->name }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="flex items-center pb-3">
+                    <p class="mr-3">状態：</p>
+                    <ul class="flex items-center">
+                        <li
+                            class="@if ($availableId == 0) PButton-primary-mini @else PButton-gray-mini @endif mr-3">
+                            <a
+                                href="{{ route('items.result', ['keyword' => $keyword, 'categoryId' => $categoryId, 'availableId' => 0, 'sortId' => 0]) }}">全て</a>
+                        </li>
+                        <li
+                            class="@if ($availableId == 1) PButton-primary-mini @else PButton-gray-mini @endif mr-3">
+                            <a
+                                href="{{ route('items.result', ['keyword' => $keyword, 'categoryId' => $categoryId, 'availableId' => 1, 'sortId' => 0]) }}">利用可能</a>
+                        </li>
+                        <li
+                            class="@if ($availableId == 2) PButton-primary-mini @else PButton-gray-mini @endif mr-3">
+                            <a
+                                href="{{ route('items.result', ['keyword' => $keyword, 'categoryId' => $categoryId, 'availableId' => 2, 'sortId' => 0]) }}">利用中</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex items-center pb-3">
+                    <p class="mr-3">並び順：</p>
+                    <ul class="flex items-center">
+                        <li
+                            class="@if ($sortId == 0) PButton-primary-mini @else PButton-gray-mini @endif mr-3">
+                            <a
+                                href="{{ route('items.result', ['keyword' => $keyword, 'categoryId' => $categoryId, 'availableId' => $availableId, 'sortId' => 0]) }}">新着順</a>
+                        </li>
+                        <li
+                            class="@if ($sortId == 1) PButton-primary-mini @else PButton-gray-mini @endif mr-3">
+                            <a
+                                href="{{ route('items.result', ['keyword' => $keyword, 'categoryId' => $categoryId, 'availableId' => $availableId, 'sortId' => 1]) }}">人気順</a>
                         </li>
                     </ul>
                 </div>
