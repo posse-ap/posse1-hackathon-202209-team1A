@@ -28,7 +28,7 @@ class ItemController extends Controller
 
     public function result($keyword)
     {
-        $items = Item::simplePaginate(10);
+        $items = Item::paginate(10);
         $query = Item::query();
 
         if ($keyword) {
@@ -44,14 +44,14 @@ class ItemController extends Controller
                 $query->where('is_public', true)->where('name', 'like', '%' . $value . '%');
             }
 
-            $items = $query->simplePaginate(10);
+            $items = $query->paginate(10);
         }
         return view('items.search', compact('items', 'keyword'));
     }
 
     public function categoryList($categoryId)
     {
-        $items = Item::where('category_id', $categoryId)->where('is_public', true)->simplePaginate(10);
+        $items = Item::where('category_id', $categoryId)->where('is_public', true)->paginate(10);
         $categoryName = Category::find($categoryId)->name;
         $keyword = null;
 
@@ -60,7 +60,7 @@ class ItemController extends Controller
 
     public function latestList()
     {
-        $items = Item::where('is_public', true)->orderBy('created_at', 'desc')->simplePaginate(10);
+        $items = Item::where('is_public', true)->orderBy('created_at', 'desc')->paginate(10);
         $categoryName = "新着";
         $keyword = null;
 
