@@ -20,25 +20,85 @@
             </form>
             <div class="flex text-white whitespace-nowrap mt-4">
                 <p>キーワード：</p>
-                <a href="{{ route('items.result', ['keyword' => 'Go言語', 'categoryId' => 0, 'availableId' => 0, 'sortId' => 0]) }}" class="block mr-3">Go言語</a>
-                <a href="{{ route('items.result', ['keyword' => 'Rust', 'categoryId' => 0, 'availableId' => 0, 'sortId' => 0]) }}" class="block mr-3">Rust</a>
-                <a href="{{ route('items.result', ['keyword' => 'スクラム', 'categoryId' => 0, 'availableId' => 0, 'sortId' => 0]) }}" class="block mr-3">スクラム</a>
-                <a href="{{ route('items.result', ['keyword' => 'Laravel', 'categoryId' => 0, 'availableId' => 0, 'sortId' => 0]) }}" class="block mr-3">Laravel</a>
+                <a href="{{ route('items.result', ['keyword' => 'Go言語', 'categoryId' => 0, 'availableId' => 0, 'sortId' => 0]) }}"
+                    class="block mr-3">Go言語</a>
+                <a href="{{ route('items.result', ['keyword' => 'Rust', 'categoryId' => 0, 'availableId' => 0, 'sortId' => 0]) }}"
+                    class="block mr-3">Rust</a>
+                <a href="{{ route('items.result', ['keyword' => 'スクラム', 'categoryId' => 0, 'availableId' => 0, 'sortId' => 0]) }}"
+                    class="block mr-3">スクラム</a>
+                <a href="{{ route('items.result', ['keyword' => 'Laravel', 'categoryId' => 0, 'availableId' => 0, 'sortId' => 0]) }}"
+                    class="block mr-3">Laravel</a>
             </div>
         </div>
     </div>
     <div class="h-full px-8 sm:px-12 lg:px-24">
         <div class="py-12 text-center">
             <h2 class="text-2xl font-bold py-6">新着</h2>
-            <div class="flex py-4">
-                @foreach ($latestItems as $key => $item)
+            @if (!Auth::check())
+                <div class="flex py-4 modal-open">
+                @else
+                    <div class="flex py-4">
+            @endif
+            @foreach ($latestItems as $key => $item)
+                @if ($key < $displayLimit)
+                    <x-item-card :item="$item"></x-item-card>
+                @endif
+            @endforeach
+        </div>
+        <div>
+            <a href="{{ route('items.latestList', ['categoryId' => 0, 'availableId' => 0, 'sortId' => 0]) }}"
+                class="inline-block bg-transparent hover:bg-gray-100 text-gray-500 font-semibold py-2 px-6 border border-gray-500 rounded">
+                <div class="flex items-center">
+                    <span class="px-2">すべて見る</span>
+                    <x-codicon-triangle-down class="inline-block w-5 h-5" />
+                </div>
+            </a>
+        </div>
+    </div>
+
+    @if (count($commingSoonItems) > 0)
+        <div class="py-12 text-center">
+            <h2 class="text-2xl font-bold py-6">もうすぐ利用できます</h2>
+            @if (!Auth::check())
+                <div class="flex py-4 modal-open">
+                @else
+                    <div class="flex py-4">
+            @endif
+            @foreach ($commingSoonItems as $key => $item)
+                @if ($key < $displayLimit)
+                    <x-item-card :item="$item"></x-item-card>
+                @endif
+            @endforeach
+        </div>
+        <div>
+            <a href="{{ route('items.commingSoonList', ['categoryId' => 0, 'availableId' => 0, 'sortId' => 0]) }}"
+                class="inline-block bg-transparent hover:bg-gray-100 text-gray-500 font-semibold py-2 px-6 border border-gray-500 rounded">
+                <div class="flex items-center">
+                    <span class="px-2">すべて見る</span>
+                    <x-codicon-triangle-down class="inline-block w-5 h-5" />
+                </div>
+            </a>
+        </div>
+        </div>
+    @endif
+
+    @foreach ($categoryItems as $category)
+        @if ($loop->index < $displayLimit)
+            <div class="py-12 text-center">
+                <h2 class="text-2xl font-bold py-6">{{ $category->name }}</h2>
+                @if (!Auth::check())
+                    <div class="flex py-4 modal-open">
+                    @else
+                        <div class="flex py-4">
+                @endif
+                @foreach ($category->items as $key => $item)
                     @if ($key < $displayLimit)
                         <x-item-card :item="$item"></x-item-card>
                     @endif
                 @endforeach
             </div>
             <div>
-                <a href="{{ route('items.latestList', ['categoryId' => 0, 'availableId' => 0, 'sortId' => 0]) }}"
+                <a href="{{ route('items.categoryList', ['categoryId' => $category->id]) }}"
                     class="inline-block bg-transparent hover:bg-gray-100 text-gray-500 font-semibold py-2 px-6 border border-gray-500 rounded">
                     <div class="flex items-center">
                         <span class="px-2">すべて見る</span>
@@ -46,49 +106,13 @@
                     </div>
                 </a>
             </div>
-        </div>
-
-        @if (count($commingSoonItems) > 0)
-            <div class="py-12 text-center">
-                <h2 class="text-2xl font-bold py-6">もうすぐ利用できます</h2>
-                <div class="flex py-4">
-                    @foreach ($commingSoonItems as $key => $item)
-                        @if ($key < $displayLimit)
-                            <x-item-card :item="$item"></x-item-card>
-                        @endif
-                    @endforeach
-                </div>
-                <div>
-                    <a href="{{ route('items.commingSoonList', ['categoryId' => 0, 'availableId' => 0, 'sortId' => 0]) }}"
-                        class="inline-block bg-transparent hover:bg-gray-100 text-gray-500 font-semibold py-2 px-6 border border-gray-500 rounded">
-                        <div class="flex items-center">
-                            <span class="px-2">すべて見る</span>
-                            <x-codicon-triangle-down class="inline-block w-5 h-5" />
-                        </div>
-                    </a>
-                </div>
-            </div>
         @endif
-
-        @foreach ($categoryItems as $category)
-            <div class="py-12 text-center">
-                <h2 class="text-2xl font-bold py-6">{{ $category->name }}</h2>
-                <div class="flex py-4">
-                    @foreach ($category->items as $key => $item)
-                        @if ($key < $displayLimit)
-                            <x-item-card :item="$item"></x-item-card>
-                        @endif
-                    @endforeach
-                </div>
-                <div>
-                    <a href="{{ route('items.categoryList', ['categoryId' => $category->id]) }}"
-                        class="inline-block bg-transparent hover:bg-gray-100 text-gray-500 font-semibold py-2 px-6 border border-gray-500 rounded">
-                        <div class="flex items-center">
-                            <span class="px-2">すべて見る</span>
-                            <x-codicon-triangle-down class="inline-block w-5 h-5" />
-                        </div>
-                    </a>
-                </div>
-        @endforeach
+    @endforeach
     </div>
+    <div id="modal-load" class="md:w-2/4 w-11/12 rounded-2xl block modal-load">
+        @include('modals.please_login')
+    </div>
+    <div class="overlay">
+    </div>
+
 </x-guest-layout>

@@ -5,9 +5,15 @@
         @endif
     </p>
     <div class="bg-slate-100 w-full">
-        <a href="{{ route('items.show', ['id' => $item->id]) }}">
-            <img class="object-contain h-48 w-96" src="{{ \Storage::url($item->image_path) }}">
-        </a>
+        @if (Auth::check())
+            <a href="{{ route('items.show', ['id' => $item->id]) }}">
+                <img class="object-contain h-48 w-96" src="{{ \Storage::url($item->image_path) }}">
+            </a>
+        @else
+            <div>
+                <img class="object-contain h-48 w-96" src="{{ \Storage::url($item->image_path) }}">
+            </div>
+        @endif
     </div>
     <p class="font-bold py-2 w-full">{{ $item->category->name ?? '' }}</p>
     <p class="w-full">{{ $item->name }}</p>

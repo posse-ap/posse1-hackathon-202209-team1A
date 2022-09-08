@@ -44,8 +44,9 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     });
 });
 
+Route::get('items/{id}', [ItemController::class, 'show'])->name('items.show');
+
 Route::middleware(['auth'])->group(function () {
-    Route::get('items/{id}', [ItemController::class, 'show'])->name('items.show');
     Route::post('items/{id}', [UserController::class, 'store'])->name('application.create');
     Route::post('items/edit/{id}', [UserController::class, 'edit'])->name('application.edit');
     Route::post('items/returnItem/{id}', [UserController::class, 'returnItem'])->name('application.returnItem');
