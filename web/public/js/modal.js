@@ -6,12 +6,7 @@ var __webpack_exports__ = {};
 $(function () {
   //モーダルウィンドウを出現させるクリックイベント
   $(".modal-open").click(function () {
-    // 押された場所のidを取得
-    console.log('modal.js出たよ！');
-    var pushedId = $(this).attr('id').split(" ")[0];
-    $(".modal-inner").hide();
-    $("#" + pushedId + "-modal").show(); //キーボード操作などにより、オーバーレイが多重起動するのを防止する
-
+    //キーボード操作などにより、オーバーレイが多重起動するのを防止する
     $(this).blur(); //ボタンからフォーカスを外す
 
     if ($("#modal-overlay")[0]) return false; //新しくモーダルウィンドウを起動しない (防止策1)
