@@ -24,16 +24,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
-<body class="font-sans antialiased">
-    <div class="text-sm relative">
+    <body class="font-sans antialiased">
+        <div class="text-sm relative min-h-screen pb-80">
 
         <!-- Page Heading -->
         @include('components.header')
 
-        <!-- Page Content -->
-        <main class="h-full">
-            {{ $slot }}
-        </main>
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
+            </main>
 
         <!-- Page Footer -->
         @include('components.footer')
