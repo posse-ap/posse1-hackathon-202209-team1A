@@ -16,13 +16,13 @@
     </head>
 
     <body class="font-sans antialiased">
-        <div class="text-sm">
+        <div class="text-sm relative min-h-screen pb-60">
 
             <!-- Page Heading -->
             @include('components.header')
 
             <!-- Page Content -->
-            <main class="h-full">
+            <main>
                 {{ $slot }}
             </main>
 

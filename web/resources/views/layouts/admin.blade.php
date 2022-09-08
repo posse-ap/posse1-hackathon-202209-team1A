@@ -18,7 +18,7 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="text-sm relative h-screen">
+    <div class="text-sm relative min-h-screen pb-80">
 
         <!-- Page Heading -->
         @include('components.header')
