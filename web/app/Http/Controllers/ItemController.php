@@ -58,12 +58,47 @@ class ItemController extends Controller
         return view('items.search', compact('items', 'categoryName', 'keyword'));
     }
 
-    public function latestList()
+    public function latestList($categoryId, $availableId)
     {
         $items = Item::where('is_public', true)->orderBy('created_at', 'desc')->paginate(20);
         $categoryName = "新着";
         $keyword = null;
+        $categories = Category::all();
 
-        return view('items.search', compact('items', 'categoryName', 'keyword'));
+        if($categoryId != 0) {
+            if($availableId == 0) {
+                $items = Item::where('is_public', true)->where('category_id', $categoryId)->orderBy('created_at', 'desc')->paginate(20);
+            } elseif ($availableId == 1) {
+                $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereDoesntHave('usageHistories', function($query)
+                {
+                    $query->where('is_returned', false);
+                })
+                ->orderBy('created_at', 'desc')->paginate(20);
+            } else {
+                $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereHas('usageHistories', function($query)
+                {
+                    $query->where('is_returned', false);
+                })
+                ->orderBy('created_at', 'desc')->paginate(20);
+            }
+        } else {
+            if($availableId == 0) {
+                $items = Item::where('is_public', true)->paginate(20);
+            } elseif ($availableId == 1) {
+                $items = Item::where('is_public', true)->whereDoesntHave('usageHistories', function($query)
+                {
+                    $query->where('is_returned', false);
+                })
+                ->orderBy('created_at', 'desc')->paginate(20);
+            } else {
+                $items = Item::where('is_public', true)->whereHas('usageHistories', function($query)
+                {
+                    $query->where('is_returned', false);
+                })
+                ->orderBy('created_at', 'desc')->paginate(20);
+            }
+        }
+
+        return view('items.search', compact('items', 'categoryName', 'keyword', 'categories', 'categoryId', 'availableId'));
     }
 }
