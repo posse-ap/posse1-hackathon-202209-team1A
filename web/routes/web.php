@@ -3,9 +3,11 @@
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminItemController;
+use App\Http\Controllers\Admin\AdminUsageHistoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MypageController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('users', [AdminUserController::class, 'index'])->name('admin.users.index');
+    Route::get('userHistory', [AdminUsageHistoryController::class, 'index'])->name('admin.userHistory.index');
 
     Route::prefix('categories')->group(function () {
         Route::get('/', [AdminCategoryController::class, 'index'])->name('admin.categories.index');
@@ -41,16 +44,25 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     });
 });
 
+Route::get('items/{id}', [ItemController::class, 'show'])->name('items.show');
+
 Route::middleware(['auth'])->group(function () {
-    Route::get('items/{id}', [ItemController::class, 'show'])->name('items.show');
+    Route::post('items/{id}', [UserController::class, 'store'])->name('application.create');
+    Route::post('items/edit/{id}', [UserController::class, 'edit'])->name('application.edit');
+    Route::post('items/returnItem/{id}', [UserController::class, 'returnItem'])->name('application.returnItem');
     Route::get('mypage', [MypageController::class, 'index'])->name('mypage');
+    Route::post('mypage', [MypageController::class, 'edit'])->name('mypage.edit');
+    Route::post('mypage/password', [MypageController::class, 'update'])->name('mypage.passwordUpdate');
 });
 
 Route::prefix('items')->group(function () {
-    Route::get('/search', [ItemController::class, 'search'])->name('items.search');
+    Route::get('search/{keyword}/{categoryId}/{availableId}/{sortId}', [ItemController::class, 'result'])->name('items.result');
+    Route::get('category/{categoryId}/{availableId}/{sortId}', [ItemController::class, 'categoryList'])->name('items.categoryList');
+    Route::get('latest/{categoryId}/{availableId}/{sortId}', [ItemController::class, 'latestList'])->name('items.latestList');
+    Route::get('commingSoon/{categoryId}/{availableId}/{sortId}', [ItemController::class, 'commingSoonList'])->name('items.commingSoonList');
 });
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+Route::post('/', [ItemController::class, 'search'])->name('items.search');
 
 require __DIR__ . '/auth.php';
-
