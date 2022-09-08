@@ -7,7 +7,7 @@
                     @csrf
                     <div class="relative">
                         <input type="text" class="px-8 py-2 border-slate-300 rounded search-box" placeholder="キーワードで検索"
-                            name="keyword" @if(isset($keyword)) value="{{ $keyword  }}"@endif>
+                            name="keyword" @if (isset($keyword)) value="{{ $keyword }}" @endif>
                         <button type="submit" class="w-6 h-6 text-gray-600 absolute top-2 left-2">
                             <svg class="w-full" fill="#C6C9CC" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <path
@@ -20,10 +20,10 @@
             </form>
             <div class="flex text-white whitespace-nowrap mt-4">
                 <p>キーワード：</p>
-                <a href="{{ route('items.result', ['keyword' => "Go言語"]) }}" class="block mr-3">Go言語</a>
-                <a href="{{ route('items.result', ['keyword' => "Rust"]) }}" class="block mr-3">Rust</a>
-                <a href="{{ route('items.result', ['keyword' => "スクラム"]) }}" class="block mr-3">スクラム</a>
-                <a href="{{ route('items.result', ['keyword' => "Laravel"]) }}" class="block mr-3">Laravel</a>
+                <a href="{{ route('items.result', ['keyword' => 'Go言語']) }}" class="block mr-3">Go言語</a>
+                <a href="{{ route('items.result', ['keyword' => 'Rust']) }}" class="block mr-3">Rust</a>
+                <a href="{{ route('items.result', ['keyword' => 'スクラム']) }}" class="block mr-3">スクラム</a>
+                <a href="{{ route('items.result', ['keyword' => 'Laravel']) }}" class="block mr-3">Laravel</a>
             </div>
         </div>
     </div>
@@ -49,25 +49,26 @@
         </div>
 
         @foreach ($categoryItems as $category)
-            <div class="py-12 text-center">
-                <h2 class="text-2xl font-bold py-6">{{ $category->name }}</h2>
-                <div class="flex py-4">
-                    @foreach ($category->items as $key => $item)
-                        @if ($key < $displayLimit)
-                            <x-item-card :item="$item"></x-item-card>
-                        @endif
-                    @endforeach
-                </div>
-                <div>
-                    <a href="{{ route('items.categoryList', ['categoryId' => $category->id]) }}"
-                        class="inline-block bg-transparent hover:bg-gray-100 text-gray-500 font-semibold py-2 px-6 border border-gray-500 rounded">
-                        <div class="flex items-center">
-                            <span class="px-2">すべて見る</span>
-                            <x-codicon-triangle-down class="inline-block w-5 h-5" />
-                        </div>
-                    </a>
-                </div>
-            </div>
+            @if ($loop->index < $displayLimit)
+                <div class="py-12 text-center">
+                    <h2 class="text-2xl font-bold py-6">{{ $category->name }}</h2>
+                    <div class="flex py-4">
+                        @foreach ($category->items as $key => $item)
+                            @if ($key < $displayLimit)
+                                <x-item-card :item="$item"></x-item-card>
+                            @endif
+                        @endforeach
+                    </div>
+                    <div>
+                        <a href="{{ route('items.categoryList', ['categoryId' => $category->id]) }}"
+                            class="inline-block bg-transparent hover:bg-gray-100 text-gray-500 font-semibold py-2 px-6 border border-gray-500 rounded">
+                            <div class="flex items-center">
+                                <span class="px-2">すべて見る</span>
+                                <x-codicon-triangle-down class="inline-block w-5 h-5" />
+                            </div>
+                        </a>
+                    </div>
+            @endif
         @endforeach
     </div>
 </x-guest-layout>
