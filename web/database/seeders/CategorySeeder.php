@@ -23,6 +23,7 @@ class CategorySeeder extends Seeder
             ['name' => 'PC用品', 'created_at' => "2022-05-15"],
             ['name' => '書籍：小説', 'created_at' => "2022-04-15"],
             ['name' => '書籍：漫画', 'created_at' => "2022-05-15"],
+            ['name' => '文具', 'created_at' => "2022-05-15"],
         ];
 
         Category::insert($data);

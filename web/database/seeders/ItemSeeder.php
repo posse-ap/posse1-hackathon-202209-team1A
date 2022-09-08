@@ -109,6 +109,14 @@ class ItemSeeder extends Seeder
                 'is_public' => true,
                 'provider' => '株式会社アンチパターン',
             ],
+            [
+                'category_id' => 7,
+                'name' => 'ペン',
+                'image_path' => $path,
+                'available_days' => 14,
+                'is_public' => true,
+                'provider' => '株式会社アンチパターン',
+            ],
         ];
 
         Item::insert($data);
