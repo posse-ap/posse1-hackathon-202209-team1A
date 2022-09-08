@@ -13,6 +13,7 @@ const COMMING_SOON_ITEMS_DAYS = 3;
 
 class ItemController extends Controller
 {
+    const LATEST_ITEMS_DAYS = 30;
     public function show(int $id)
     {
         $item = Item::find($id);
@@ -134,29 +135,29 @@ class ItemController extends Controller
         if ($categoryId != 0) {
             if ($availableId == 0) {
                 if ($sortId == 0) {
-                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->orderBy('created_at', 'desc')->paginate(10);
+                    $items = Item::where('is_public', true)->whereDate('created_at', '>=', Carbon::now()->subDays(self::LATEST_ITEMS_DAYS))->where('category_id', $categoryId)->orderBy('created_at', 'desc')->paginate(10);
                 } else {
-                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
+                    $items = Item::where('is_public', true)->whereDate('created_at', '>=', Carbon::now()->subDays(self::LATEST_ITEMS_DAYS))->where('category_id', $categoryId)->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
                 }
             } elseif ($availableId == 1) {
                 if ($sortId == 0) {
-                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereDoesntHave('usageHistories', function ($query) {
+                    $items = Item::where('is_public', true)->whereDate('created_at', '>=', Carbon::now()->subDays(self::LATEST_ITEMS_DAYS))->where('category_id', $categoryId)->whereDoesntHave('usageHistories', function ($query) {
                         $query->where('is_returned', false);
                     })
                         ->orderBy('created_at', 'desc')->paginate(10);
                 } else {
-                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereDoesntHave('usageHistories', function ($query) {
+                    $items = Item::where('is_public', true)->whereDate('created_at', '>=', Carbon::now()->subDays(self::LATEST_ITEMS_DAYS))->where('category_id', $categoryId)->whereDoesntHave('usageHistories', function ($query) {
                         $query->where('is_returned', false);
                     })->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
                 }
             } else {
                 if ($sortId == 0) {
-                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereHas('usageHistories', function ($query) {
+                    $items = Item::where('is_public', true)->whereDate('created_at', '>=', Carbon::now()->subDays(self::LATEST_ITEMS_DAYS))->where('category_id', $categoryId)->whereHas('usageHistories', function ($query) {
                         $query->where('is_returned', false);
                     })
                         ->orderBy('created_at', 'desc')->paginate(10);
                 } else {
-                    $items = Item::where('is_public', true)->where('category_id', $categoryId)->whereHas('usageHistories', function ($query) {
+                    $items = Item::where('is_public', true)->whereDate('created_at', '>=', Carbon::now()->subDays(self::LATEST_ITEMS_DAYS))->where('category_id', $categoryId)->whereHas('usageHistories', function ($query) {
                         $query->where('is_returned', false);
                     })->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
                 }
@@ -164,29 +165,29 @@ class ItemController extends Controller
         } else {
             if ($availableId == 0) {
                 if ($sortId == 0) {
-                    $items = Item::where('is_public', true)->orderBy('created_at', 'desc')->paginate(10);
+                    $items = Item::where('is_public', true)->whereDate('created_at', '>=', Carbon::now()->subDays(self::LATEST_ITEMS_DAYS))->orderBy('created_at', 'desc')->paginate(10);
                 } else {
-                    $items = Item::where('is_public', true)->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
+                    $items = Item::where('is_public', true)->whereDate('created_at', '>=', Carbon::now()->subDays(self::LATEST_ITEMS_DAYS))->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
                 }
             } elseif ($availableId == 1) {
                 if ($sortId == 0) {
-                    $items = Item::where('is_public', true)->whereDoesntHave('usageHistories', function ($query) {
+                    $items = Item::where('is_public', true)->whereDate('created_at', '>=', Carbon::now()->subDays(self::LATEST_ITEMS_DAYS))->whereDoesntHave('usageHistories', function ($query) {
                         $query->where('is_returned', false);
                     })
                         ->orderBy('created_at', 'desc')->paginate(10);
                 } else {
-                    $items = Item::where('is_public', true)->whereDoesntHave('usageHistories', function ($query) {
+                    $items = Item::where('is_public', true)->whereDate('created_at', '>=', Carbon::now()->subDays(self::LATEST_ITEMS_DAYS))->whereDoesntHave('usageHistories', function ($query) {
                         $query->where('is_returned', false);
                     })->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
                 }
             } else {
                 if ($sortId == 0) {
-                    $items = Item::where('is_public', true)->whereHas('usageHistories', function ($query) {
+                    $items = Item::where('is_public', true)->whereDate('created_at', '>=', Carbon::now()->subDays(self::LATEST_ITEMS_DAYS))->whereHas('usageHistories', function ($query) {
                         $query->where('is_returned', false);
                     })
                         ->orderBy('created_at', 'desc')->paginate(10);
                 } else {
-                    $items = Item::where('is_public', true)->whereHas('usageHistories', function ($query) {
+                    $items = Item::where('is_public', true)->whereDate('created_at', '>=', Carbon::now()->subDays(self::LATEST_ITEMS_DAYS))->whereHas('usageHistories', function ($query) {
                         $query->where('is_returned', false);
                     })->withCount('usageHistories')->orderBy('usage_histories_count', 'desc')->paginate(10);
                 }
