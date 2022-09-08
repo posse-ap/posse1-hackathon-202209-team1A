@@ -22,7 +22,7 @@
             @include('components.admin-navigation')
 
             <!-- Page Content -->
-            <main class="h-full px-8 sm:px-12 lg:px-24">
+            <main class="px-8 sm:px-12 lg:px-24">
                 {{ $slot }}
             </main>
 

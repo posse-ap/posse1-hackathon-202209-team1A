@@ -21,7 +21,7 @@
             @include('components.header')
 
             <!-- Page Content -->
-            <main class="h-full">
+            <main>
                 {{ $slot }}
             </main>
 

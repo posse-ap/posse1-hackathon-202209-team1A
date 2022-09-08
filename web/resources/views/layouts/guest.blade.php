@@ -16,7 +16,7 @@
     </head>
 
     <body class="font-sans antialiased">
-        <div class="text-sm relative h-screen">
+        <div class="text-sm">
 
             <!-- Page Heading -->
             @include('components.header')
