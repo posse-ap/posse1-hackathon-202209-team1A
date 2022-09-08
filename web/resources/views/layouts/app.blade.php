@@ -19,7 +19,7 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
-        <div class="text-sm relative">
+        <div class="text-sm relative min-h-screen pb-80">
 
             <!-- Page Heading -->
             @if(isset($keyword))
@@ -29,7 +29,7 @@
             @endif
 
             <!-- Page Content -->
-            <main class="h-full">
+            <main>
                 {{ $slot }}
             </main>
 

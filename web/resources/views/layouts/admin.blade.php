@@ -18,14 +18,14 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="text-sm relative">
+    <div class="text-sm relative min-h-screen pb-80">
 
         <!-- Page Heading -->
         @include('components.header')
         @include('components.admin-navigation')
 
         <!-- Page Content -->
-        <main class="h-full px-8 sm:px-12 lg:px-24">
+        <main class="px-8 sm:px-12 lg:px-24">
             {{ $slot }}
         </main>
 
